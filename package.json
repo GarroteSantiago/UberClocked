@@ -1,0 +1,21 @@
+{
+  "name": "uberclocked",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \\\"npm --prefix server start\\\" \\\"npm --prefix client start\\\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GarroteSantiago/UberClocked.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GarroteSantiago/UberClocked/issues"
+  },
+  "homepage": "https://github.com/GarroteSantiago/UberClocked#readme"
+}
