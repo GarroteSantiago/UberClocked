@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Start.module.css'
 import LargeLogo from "../components/logo/LargeLogo.jsx";
-import TextButton from "../components/TextButton.jsx";
+import TextButton from "../components/Buttons_and_others/TextButton.jsx";
 
 function Start() {
     return (
