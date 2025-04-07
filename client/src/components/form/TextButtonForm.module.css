@@ -1,0 +1,11 @@
+.textButtonForm {
+    color: #1A00FF;
+    font-family: Inconsolata, monospace;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.textButtonForm:visited, .textButton:active, .textButton:hover {
+    color: #1A00FF;
+    text-decoration: none;
+}

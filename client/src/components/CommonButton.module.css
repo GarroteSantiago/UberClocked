@@ -1,0 +1,14 @@
+.commonButton{
+    cursor: pointer;
+    background-color: #393039;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    width: 152px;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+    font-family: Inconsolata, monospace;
+    font-style: normal;
+
+}
