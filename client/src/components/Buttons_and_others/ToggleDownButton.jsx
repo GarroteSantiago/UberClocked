@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 
 const ToggleDownButton = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     const toggleContent = () => {
-        setIsOpen(!isOpen); // Cambia el estado entre abierto/cerrado
+        setIsVisible(!isVisible); // Cambia el estado entre abierto/cerrado
     };
     return (
-        <div className="toggle-container">
+        <div>
             <button onClick={toggleContent} className="toggle-button">
-                {isOpen ? 'Ocultar Contenido' : 'Mostrar Contenido'}
+                {"Home"}
             </button>
-
-            <div className={`toggle-content ${isOpen ? 'open' : ''}`}>
-                <p>
-                    Este es el contenido desplegable. Puedes personalizarlo con texto,
-                    imágenes u otros elementos según lo necesites.
-                </p>
-            </div>
+            { isVisible &&
+                <div className="toggle-store">
+                    <p> Botones de la store</p>
+                    {/* <Link to="/pc-hardware" className="dropdown-item">PC Hardware</Link>
+                    <Link to="/server-hardware" className="dropdown-item">Server Hardware</Link>
+                    <Link to="/built-pcs" className="dropdown-item">Built PC’s</Link>*/}
+                </div>
+            }
         </div>
     );
 };
