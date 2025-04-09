@@ -1,14 +1,13 @@
 .toggle-button {
     cursor: pointer;
-    background-color: #393039;
-    color: #FFFFFF;
+    color: #0A060D;
     border: none;
     border-radius: 14px;
     width: 152px;
     height: 45px;
     font-size: 20px;
     text-align: center;
-    font-family: Inconsolata, monospace;
+    font-family: Papyrus, monospace;
     font-style: normal;
 
 }

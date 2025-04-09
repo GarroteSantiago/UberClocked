@@ -1,0 +1,13 @@
+.logoContainer {
+    width: fit-content;
+    height: fit-content;
+    justify-content: center;
+    display: flex;
+}
+
+.logoContainer img {
+    width: 113px;
+    height: 252px;
+    display: block;
+    font-size-adjust: 60;
+}
