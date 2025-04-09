@@ -10,7 +10,7 @@ function InfoCard({title, data, popUpContent, popUpText}) {
                 <p className={styles.text}>{data}</p>
             </div>
             <div className={styles.infoButtons}>
-                <PopUpTextButton text={popUpText} popUpContent={popUpContent}>Modify</PopUpTextButton>
+                <PopUpTextButton popUpText={popUpText} popUpContent={popUpContent}>Modify</PopUpTextButton>
             </div>
         </div>
     )

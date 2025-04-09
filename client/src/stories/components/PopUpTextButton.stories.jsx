@@ -6,7 +6,7 @@ export default {
     component: PopUpTextButton,
 }
 
-const Template = (args) => <PopUpTextButton {...args}>Hola</PopUpTextButton>;
+const Template = (args) => <PopUpTextButton {...args}>Test pop up button</PopUpTextButton>;
 export const Default = Template.bind({});
 
 const tempPopUpContent =
@@ -15,6 +15,6 @@ const tempPopUpContent =
     </>
 
 Default.args = {
-    text: "do this test action",
+    popUpText: "Placeholder question?",
     popUpContent: tempPopUpContent,
 };

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './PopUpTextButton.module.css';
 import PopUp from "./PopUp.jsx";
 
-function PopUpTextButton({ children, popUpContent, text}) {
+    function PopUpTextButton({ children, popUpContent, popUpText}) {
     const [showOverlay, setShowOverlay] = useState(false);
 
     const handleClick = (e) => {
@@ -19,7 +19,7 @@ function PopUpTextButton({ children, popUpContent, text}) {
             </button>
 
             {showOverlay && (
-                <PopUp onClose={handleClose} text={text}>
+                <PopUp onClose={handleClose} text={popUpText}>
                     {popUpContent}
                 </PopUp>
             )}

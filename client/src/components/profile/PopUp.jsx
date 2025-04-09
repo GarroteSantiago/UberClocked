@@ -7,7 +7,7 @@ function PopUp({ children, onClose, text}) {
     return (
         <>
         <div className={styles.overlayContent} onClick={(e) => e.stopPropagation()}>
-            <h1>Are you sure you want to {text}?</h1>
+            <h3>{text}</h3>
 
             {children}
             <p>Confirm writing your password below</p>
