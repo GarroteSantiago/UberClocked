@@ -1,5 +1,10 @@
 /* DataField.module.css */
 
+.container {
+    width: 100%;
+    display: block;
+}
+
 .dataField {
     caret-color: transparent;
     width: 300px;
