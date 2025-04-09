@@ -1,11 +1,4 @@
-.logoContainer {
-    width: fit-content;
-    height: fit-content;
-    justify-content: center;
-    display: flex;
-}
-
-.logoContainer img {
+.logo {
     width: 113px;
     height: 252px;
     display: block;

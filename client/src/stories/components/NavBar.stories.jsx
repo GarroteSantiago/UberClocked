@@ -1,8 +1,8 @@
-import navbar from '../../components/form/navbar.jsx';
+import Navbar from '../../components/form/navbar.jsx';
 
 export default {
     title: 'Components/Navbar',
-    component: navbar,
+    component: Navbar,
 };
 
-export const Default = () => <navbar />;
+export const Default = () => <Navbar />;

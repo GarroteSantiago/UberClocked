@@ -1,11 +1,9 @@
 import React from "react";
-import style from "./SmallLogo.module.css";
+import styles from "./SmallLogo.module.css";
 
 function SmallLogo() {
     return (
-        <div className={style.logoContainer}>
-            <img src = "/Logo.svg" alt = "Logo"/>
-        </div>
+        <img className={styles.logo} src="/Logo.svg" alt="Logo"/>
     )
 }
 

@@ -9,10 +9,7 @@ function HomeUser(){
     return (
         <div className={styles.screen}>
             <Navbar />
-            <div className={styles.content}>
-            </div>
         </div>
-
     )
 }
 

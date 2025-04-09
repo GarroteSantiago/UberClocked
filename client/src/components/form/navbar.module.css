@@ -1,31 +1,36 @@
 .navbar {
-    background-color: #000000;
-    opacity: 1;
+    font-family: Inconsolata, monospace;
+    background-color: rgba(0, 0, 0, 0.23);
+    margin: 0;
+    padding: 0;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    height: 114px;
 }
-.center {
-    display: flex;
+
+.navbar img{
+    padding: 15px;
+}
+
+.options {
+    display: block;
     gap: 36px;
     align-items: center;
-    padding: 24px;
+    padding: 56px;
 }
 
-
-.center a {
-    color: white;
+.enabled {
+    color: #FFFFFF;
     text-decoration: none;
     font-weight: bold;
     padding : 56px;
 }
 
-.disabled{
-    color: grey;
-    pointer-events: none;
+.disabled {
+    color: rgba(255, 255, 255, 0.29);
+    text-decoration: none;
+    font-weight: bold;
+    padding : 56px;
 }
 
-.dropdown {
-    display: flex;
-    align-items: center;
-    gap: 36px;
-}
