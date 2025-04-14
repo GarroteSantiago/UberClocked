@@ -1,0 +1,41 @@
+.navbar {
+    font-family: Inconsolata, monospace;
+    background-color: rgba(0, 0, 0, 0.23);
+    margin: 0;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 114px;
+}
+
+.navbar img{
+    padding: 0;
+}
+
+.options {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+    padding: 56px;
+}
+
+.enabled {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    padding : 56px;
+    font-family: Inconsolata, monospace;
+    font-size: 18px;
+
+}
+
+.disabled {
+    color: rgba(255, 255, 255, 0.29);
+    text-decoration: none;
+    font-weight: bold;
+    padding : 8px 12px;
+    font-family: Inconsolata, monospace;
+    font-size: 18px;
+}
+

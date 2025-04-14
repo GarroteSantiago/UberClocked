@@ -1,4 +1,4 @@
-import CommonButton from '../../components/CommonButton.jsx'
+import CommonButton from '../../components/Buttons_and_others/CommonButton.jsx'
 
 export default {
     title: "Components/CommonButton",
