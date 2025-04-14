@@ -1,0 +1,39 @@
+.container {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    padding: 34px;
+    width: fit-content;
+    height: fit-content;
+    font-family: inconsolata, monospace;
+    justify-content: center;
+}
+
+.imageContainer img{
+    width: 95px;
+    height: 95px;
+    border-radius: 100%;
+    overflow: clip;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+}
+.infoContainer h1 {
+    font-size: 75px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    font-family: inconsolata, monospace;
+    line-height: .9;
+    letter-spacing: 0;
+    align-self: center;
+}
+.infoContainer p {
+    font-size: 25px;
+    margin: 0;
+}
