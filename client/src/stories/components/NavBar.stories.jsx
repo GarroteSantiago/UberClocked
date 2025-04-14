@@ -1,4 +1,4 @@
-import Navbar from '../../components/form/navbar.jsx';
+import Navbar from '../../components/Buttons_and_others/navbar.jsx';
 
 export default {
     title: 'Components/Navbar',

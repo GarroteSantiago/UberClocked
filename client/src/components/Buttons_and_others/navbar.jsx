@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./navbar.module.css";
 import SmallLogo from "../logo/SmallLogo.jsx";
+import ToggleDownPCButton from "./ToggleDownPcButton.jsx";
+import ToggleDownButton from "./ToggleDownButton.jsx";
 
 function Navbar() {
     return (
@@ -8,10 +10,10 @@ function Navbar() {
             <nav className={styles.navbar}>
                 <SmallLogo/>
                 <div className={styles.options}>
-                    <a className={styles.disabled}>Home</a>
-                    <a className={styles.enabled}>Store</a>
-                    <a className={styles.enabled}>Build PC</a>
-                    <a className={styles.enabled}>Roulette</a>
+                    <a className={styles.enabled} > Home </a>
+                    <ToggleDownButton />
+                    <ToggleDownPCButton />
+                    <a className={styles.enabled}> Roulette </a>
                 </div>
             </nav>
         </>
