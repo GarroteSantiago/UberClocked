@@ -1,4 +1,5 @@
-.commonButcton{
+.commonButton{
+    margin: 1rem;
     cursor: pointer;
     background-color: #393039;
     color: #FFFFFF;
@@ -10,4 +11,5 @@
     text-align: center;
     font-family: Inconsolata, monospace;
     font-style: normal;
+
 }
