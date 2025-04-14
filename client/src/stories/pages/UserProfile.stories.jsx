@@ -43,7 +43,7 @@ const paymentMethods = [
 ]
 
 const handleClick = () => {
-    alert('Delete button clicked')
+    alert('Delete Button clicked')
 };
 
 const authenticationMethods = [
