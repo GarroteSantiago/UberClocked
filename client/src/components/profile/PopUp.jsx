@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PopUp.module.css";
 import DataField from "../form/DataField.jsx";
-import CommonButton from "../CommonButton.jsx";
+import CommonButton from "../Buttons_and_others/CommonButton.jsx";
 
 function PopUp({ children, onClose, text}) {
     return (

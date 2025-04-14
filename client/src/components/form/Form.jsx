@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Form.module.css';
 import FormTitle from "./FormTitle.jsx";
 import DataField from "./DataField.jsx";
-import CommonButton from "../CommonButton.jsx";
+import CommonButton from "../Buttons_and_others/CommonButton.jsx";
 import TextButtonForm from "./TextButtonForm.jsx";
 import MediumLogo from "../logo/MediumLogo.jsx"
 
