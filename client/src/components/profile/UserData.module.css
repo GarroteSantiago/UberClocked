@@ -1,12 +1,12 @@
 .container {
     background-color: transparent;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     padding: 34px;
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     font-family: inconsolata, monospace;
-    justify-content: center;
+    justify-content: start;
 }
 
 .imageContainer img{

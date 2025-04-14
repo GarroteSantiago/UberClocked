@@ -6,7 +6,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     width: 33%;
-    height: fit-content;
+    height: 600px;
     border-radius: 20px;
     background-color: #1B1222;
 }
@@ -23,5 +23,9 @@
     color: white;
     opacity: 50%;
     font-family: Inconsolata, monospace;
+}
+
+.overlayContent button {
+    color: white;
 }
 
