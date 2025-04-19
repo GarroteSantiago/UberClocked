@@ -1,0 +1,43 @@
+.navbar {
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Inconsolata, monospace;
+    background-color: rgba(0, 0, 0, 0.23);
+    margin: 0;
+    padding: 0 32px;
+}
+
+.navbar img{
+    padding: 0;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: flex-start;
+}
+
+.options {
+    display: flex;
+    gap: 120px;
+    align-items: center;
+    justify-content: center;
+    padding: 56px;
+}
+
+.imageOptions{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: end;
+    gap: 25px;
+    padding: 0 100px 0 0;
+}
+
+.textOptions{
+}

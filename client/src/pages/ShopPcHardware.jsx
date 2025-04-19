@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import Navbar from "../components/Buttons_and_others/navbar.jsx";
+import Navbar from "../components/navBar/Navbar.jsx";
 import styles from "./ShopPcHardware.module.css";
 import Stars from "../components/Buttons_and_others/Stars.jsx";
 

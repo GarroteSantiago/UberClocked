@@ -1,0 +1,10 @@
+.imageButton, .imageButton:visited, .imageButton:active, .imageButton:hover{
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    color: #FFFFFF;
+    display: block;
+    width: 100%;
+    height: 100%;
+}

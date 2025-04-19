@@ -1,0 +1,7 @@
+.DropDownMenuTextButton, .DropDownMenuTextButton:visited, .DropDownMenuTextButton:active, .DropDownMenuTextButton:hover  {
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: Inconsolata, monospace;
+    font-size: 40px;
+    text-decoration: none;
+}

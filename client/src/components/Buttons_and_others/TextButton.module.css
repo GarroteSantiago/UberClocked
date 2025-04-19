@@ -1,11 +1,6 @@
-.TextButton {
+.TextButton, .TextButton:visited, .textButton:active, .textButton:hover  {
     color: #76386C;
     font-family: Inconsolata, monospace;
     font-size: 40px;
-    text-decoration: none;
-}
-
-.TextButton:visited, .textButton:active, .textButton:hover {
-    color: #76386C;
     text-decoration: none;
 }

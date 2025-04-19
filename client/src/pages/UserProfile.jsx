@@ -5,7 +5,7 @@ import InformationSection from "../components/profile/InformationSection.jsx";
 import InfoCard from "../components/profile/InfoCard.jsx";
 import DataField from "../components/form/DataField.jsx";
 import DeletableInfoCard from "../components/profile/DeletableInfoCard.jsx";
-import DeleteAccountButton from "../components/profile/DeleteAccountButton.jsx";
+import DeleteAccountButton from "../components/Buttons_and_others/DeleteAccountButton.jsx";
 
 function UserProfile({user, paymentMethods, authenticationMethods, deleteAccountFunc}) {
     const fullNamePopUpContent =
