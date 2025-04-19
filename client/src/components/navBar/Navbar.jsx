@@ -1,17 +1,18 @@
 import React from "react";
-import styles from "./Navbar.module.css";
+    import styles from "./Navbar.module.css";
 import SmallLogo from "../logo/SmallLogo.jsx";
 import DropDownMenuButton from "../dropDownMenu/DropDownMenuButton.jsx";
 import DropDownMenu from "../dropDownMenu/DropDownMenu.jsx";
 import DropDownMenuItem from "../dropDownMenu/DropDownMenuItem.jsx";
 import DropDownMenuTextButton from "../dropDownMenu/DropDownMenuTextButton.jsx";
 import ImageButton from "../Buttons_and_others/ImageButton.jsx";
+import TextButton from "../Buttons_and_others/TextButton.jsx";
 
 function Navbar({loggedIn}) {
 
     let options = <></>
 
-    if ({loggedIn}) {
+    if (loggedIn===true) {
         options =
             <div className={styles.imageOptions}>
                 <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="#"/>
@@ -20,6 +21,8 @@ function Navbar({loggedIn}) {
     } else {
         options =
             <div className={styles.textOptions}>
+                <TextButton text="Login" url="#"></TextButton>
+                <TextButton text="Sign up" url="#"></TextButton>
             </div>
     }
 
