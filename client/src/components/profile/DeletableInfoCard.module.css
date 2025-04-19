@@ -13,6 +13,7 @@
 }
 .infoButtons{
     display: flex;
+    flex-direction: column;
     horiz-align: right;
     flex: 1;
     justify-content: flex-end;

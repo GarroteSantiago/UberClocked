@@ -1,13 +1,32 @@
 .informationSection{
     font-family: Inconsolata, monospace;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 29px;
+    gap: 30px;
+}
+
+.infoCards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.infoCardsScrollable {
+    max-height: 560px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .informationSectionTitle{
     color: #FFFFFF;
     font-size: 40px;
+}
+
+.addContainer button{
+    font-family: Inconsolata, monospace;
+    font-size: 25px;
+    color: #1A00FF;
 }

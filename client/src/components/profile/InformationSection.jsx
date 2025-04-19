@@ -2,13 +2,15 @@ import React from 'react';
 import styles from './InformationSection.module.css';
 import PopUpTextButton from "./PopUpTextButton.jsx";
 
-function InformationSection({children, title, addMethodPopUp, addMethodText, addPopUpText}) {
+function InformationSection({children, title, addMethodPopUp, addMethodText}) {
+    const childrenArray = React.Children.toArray(children);
+    const hasScroll = childrenArray.length > 4
 
-    const addPopUpContent = null;
+    let addPopUpContent = null;
 
     if (addMethodPopUp !== undefined) {
-        const addPopUpContent =
-            <PopUpTextButton popUpContent={addMethodPopUp} popUpText={addPopUpText}>
+        addPopUpContent =
+            <PopUpTextButton popUpContent={addMethodPopUp} popUpText="Are you sure you want to add this method?">
                 {addMethodText}
             </PopUpTextButton>
     }
@@ -16,8 +18,12 @@ function InformationSection({children, title, addMethodPopUp, addMethodText, add
     return (
         <div className={styles.informationSection}>
             <h2 className={styles.informationSectionTitle}>{title}</h2>
-            {children}
-            {addPopUpContent}
+            <div className={`${styles.infoCards} ${hasScroll ? styles.infoCardsScrollable : ""}`}>
+                {children}
+            </div>
+            <div className={styles.addContainer}>
+                {addPopUpContent}
+            </div>
         </div>
     )
 }
