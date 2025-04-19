@@ -1,0 +1,102 @@
+.screen{
+    font-family: Inconsolata, monospace;
+    width: 100%;
+    height: 100vh;
+    background-color: #0A060D;
+    opacity: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.carouselControls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.shopContainer {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.card {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.image {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background-color: white;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.price {
+    font-weight: bold;
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+.carouselControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.slider::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.scrollButton {
+    background-color: #1e1e1e;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.scrollButton:hover {
+    background-color: #333;
+}
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './DeleteAccountButton.module.css';
-import TextButton from "../TextButton.jsx";
+import TextButton from "../../components/Buttons_and_others/TextButton.jsx";
 
 function DeleteAccountButton({onclick}) {
     return (
