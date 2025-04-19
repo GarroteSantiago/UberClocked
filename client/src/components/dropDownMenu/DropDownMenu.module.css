@@ -2,8 +2,8 @@
     display: flex;
     position: absolute;
     top: calc(100% + 25px);
-    left: 0;
-    transform: translateX(-10%);
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
     flex-direction: column;
     justify-content: center;

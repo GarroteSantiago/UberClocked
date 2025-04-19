@@ -19,6 +19,22 @@
     font-style: normal;
 }
 
+.menuWrapper {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .dropDownButtonContainer img{
     align-self: center;
     justify-self: flex-end;

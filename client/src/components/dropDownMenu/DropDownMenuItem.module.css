@@ -1,14 +1,18 @@
 .dropDownMenuItemContainer {
     display: flex;
     position: relative;
-    width: 294px;
     height: 98px;
+    width: 100%;
+    white-space: nowrap;
+    padding: 24px 0;
+    margin: 0 24px;
     font-family: Inconsolata, monospace;
     font-size: 30px;
     font-style: normal;
     font-weight: bold;
     justify-content: center;
     align-items: center;
+
 }
 
 .dropDownMenuItemContainer a, a:visited, a:hover, a:active {
