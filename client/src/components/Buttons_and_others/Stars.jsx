@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Stars.module.css';
 
+//Evitar realizar cambios bruscos
 const StarRating = ({ totalStars = 5, initialRating = 1, onRate }) => {
     const [rating, setRating] = useState(initialRating);
     const [hover, setHover] = useState(null);
