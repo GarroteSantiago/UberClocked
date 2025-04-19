@@ -15,4 +15,5 @@ export const Default = Template.bind({});
 
 Default.args = {
     loggedIn: true,
+    onScreenUrl: "/build/pc"
 }

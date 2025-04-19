@@ -5,3 +5,11 @@
     font-size: 40px;
     text-decoration: none;
 }
+
+.isSelected, .isSelected:visited, .isSelected:active, .isSelected:hover{
+    cursor: default;
+    color: rgba(255, 255, 255, 0.23);
+    font-family: Inconsolata, monospace;
+    font-size: 40px;
+    text-decoration: none;
+}

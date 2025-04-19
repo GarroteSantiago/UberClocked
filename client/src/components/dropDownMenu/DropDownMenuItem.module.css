@@ -12,7 +12,6 @@
     font-weight: bold;
     justify-content: center;
     align-items: center;
-
 }
 
 .dropDownMenuItemContainer a, a:visited, a:hover, a:active {
@@ -20,3 +19,7 @@
     height: fit-content;
     color: #FFFFFF;
 }
+
+.isSelected a, a:visited, a:hover, a:active{
+    color: rgba(255, 255, 255, 0.23);
+ }

@@ -8,7 +8,7 @@ import DropDownMenuTextButton from "../dropDownMenu/DropDownMenuTextButton.jsx";
 import ImageButton from "../Buttons_and_others/ImageButton.jsx";
 import TextButton from "../Buttons_and_others/TextButton.jsx";
 
-function Navbar({loggedIn}) {
+function Navbar({loggedIn, onScreenUrl}) {
 
     let options = <></>
 
@@ -35,21 +35,20 @@ function Navbar({loggedIn}) {
                     <SmallLogo/>
                 </div>
                 <div className={styles.options}>
-                    <DropDownMenuTextButton text="Home" url="#" />
+                    <DropDownMenuTextButton text="Home" url="/home" onScreenUrl={onScreenUrl}/>
                     <DropDownMenuButton menuTitle={"Store"}>
                         <DropDownMenu>
-                            <DropDownMenuItem optionText="PC Hardware" optionUrl="#"/>
-                            <DropDownMenuItem optionText="Server Hardware" optionUrl="#"/>
-                            <DropDownMenuItem optionText="Build a PC" optionUrl="#"/>
+                            <DropDownMenuItem optionText="PC Hardware" optionUrl="/store/pc-hardware" onScreenUrl={onScreenUrl}/>
+                            <DropDownMenuItem optionText="Server Hardware" optionUrl="/store/server-hardware" onScreenUrl={onScreenUrl}/>
                         </DropDownMenu>
                     </DropDownMenuButton>
                     <DropDownMenuButton menuTitle={"Build PC"}>
                         <DropDownMenu>
-                            <DropDownMenuItem optionText="Build a PC" optionUrl="#"/>
-                            <DropDownMenuItem optionText="Build a server" optionUrl="#"/>
+                            <DropDownMenuItem optionText="Build a PC" optionUrl="/build/pc" onScreenUrl={onScreenUrl}/>
+                            <DropDownMenuItem optionText="Build a server" optionUrl="/build/server" onScreenUrl={onScreenUrl}/>
                         </DropDownMenu>
                     </DropDownMenuButton>
-                    <DropDownMenuTextButton text="Roulette" url="#" />
+                    <DropDownMenuTextButton text="Roulette" url="/roulette" onScreenUrl={onScreenUrl}/>
                 </div>
                 {options}
             </nav>
