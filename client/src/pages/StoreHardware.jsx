@@ -16,6 +16,7 @@ function StoreHardware({loggedIn, products}) {
             });
         }
     };
+
     return (
         <div className={styles.screen}>
             <Navbar loggedIn={loggedIn} onScreenUrl={"/store/pc-hardware"}/>
