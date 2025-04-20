@@ -1,4 +1,4 @@
-import Navbar from '../../components/navBar/Navbar.jsx';
+import Navbar from '../../../components/navBar/Navbar.jsx';
 import { MemoryRouter } from "react-router-dom";
 
 export default {

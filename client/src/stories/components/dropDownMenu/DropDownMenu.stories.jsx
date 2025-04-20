@@ -1,5 +1,5 @@
-import DropDownMenuItem from "../../components/dropDownMenu/DropDownMenuItem.jsx";
-import DropDownMenu from "../../components/dropDownMenu/DropDownMenu.jsx";
+import DropDownMenuItem from "../../../components/dropDownMenu/DropDownMenuItem.jsx";
+import DropDownMenu from "../../../components/dropDownMenu/DropDownMenu.jsx";
 import { MemoryRouter } from "react-router-dom";
 
 export default {

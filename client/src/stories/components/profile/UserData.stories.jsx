@@ -1,4 +1,4 @@
-import UserData from '../../components/profile/UserData.jsx';
+import UserData from '../../../components/profile/UserData.jsx';
 
 export default {
     title: "Components/Profile/UserData",

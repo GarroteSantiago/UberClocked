@@ -1,5 +1,5 @@
-import InfoCard from "../../components/profile/InfoCard.jsx";
-import DataField from "../../components/form/DataField.jsx";
+import InfoCard from "../../../components/profile/InfoCard.jsx";
+import DataField from "../../../components/form/DataField.jsx";
 
 export default {
     title: 'Components/Profile/InfoCard',

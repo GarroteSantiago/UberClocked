@@ -1,8 +1,8 @@
-import TextButtonForm from "../../components/form/TextButtonForm.jsx"
+import TextButtonForm from "../../../components/form/TextButtonForm.jsx"
 import { MemoryRouter } from "react-router-dom";
 
 export default {
-    title: "Components/Form/TextButtonForm",
+    title: "Components/Button/TextButtonForm",
     component: TextButtonForm,
     decorators: [
         (Story) => (

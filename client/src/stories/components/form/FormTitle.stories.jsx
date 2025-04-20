@@ -1,7 +1,7 @@
-import FormTitle from '../../components/form/FormTitle.jsx';
+import FormTitle from '../../../components/form/FormTitle.jsx';
 
 export default {
-    title: "Components/Title",
+    title: "Components/Form/Title",
     component: FormTitle,
 }
 

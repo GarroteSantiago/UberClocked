@@ -1,4 +1,4 @@
-import Form from "../../components/form/Form.jsx";
+import Form from "../../../components/form/Form.jsx";
 import {MemoryRouter} from "react-router-dom";
 
 export default {

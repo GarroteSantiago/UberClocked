@@ -1,5 +1,5 @@
-import InformationSection from '../../components/profile/InformationSection.jsx'
-import InfoCard from "../../components/profile/InfoCard.jsx";
+import InformationSection from '../../../components/profile/InformationSection.jsx'
+import InfoCard from "../../../components/profile/InfoCard.jsx";
 
 export default {
     title: 'Components/Profile/InformationSection',

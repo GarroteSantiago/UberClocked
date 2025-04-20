@@ -1,4 +1,4 @@
-import DataField from '../../components/form/DataField.jsx';
+import DataField from '../../../components/form/DataField.jsx';
 
 export default {
     title: "Components/Form/DataField",

@@ -1,5 +1,5 @@
-import DeletableInfoCard from "../../components/profile/DeletableInfoCard.jsx";
-import DataField from "../../components/form/DataField.jsx";
+import DeletableInfoCard from "../../../components/profile/DeletableInfoCard.jsx";
+import DataField from "../../../components/form/DataField.jsx";
 
 export default {
     title: 'Components/Profile/DeletableInfoCard',

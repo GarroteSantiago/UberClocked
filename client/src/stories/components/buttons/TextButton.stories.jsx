@@ -1,8 +1,8 @@
-import TextButton from "../../components/Buttons_and_others/TextButton.jsx"
+import TextButton from "../../../components/Buttons_and_others/TextButton.jsx"
 import { MemoryRouter } from "react-router-dom";
 
 export default {
-    title: "Components/TextButton",
+    title: "Components/Button/TextButton",
     component: TextButton,
     decorators: [
         (Story) => (

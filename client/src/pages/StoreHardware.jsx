@@ -1,28 +1,10 @@
 import React, {useRef} from 'react';
+import styles from "./StoreHardware.module.css";
 import Navbar from "../components/navBar/Navbar.jsx";
-import styles from "./ShopPcHardware.module.css";
 import Stars from "../components/Buttons_and_others/Stars.jsx";
 
-const pcProducts = [
-    {
-        //example:
-        id: 1,
-        name: 'AMD Ryzen 7 5800X',
-        description: '8-Core, 16-Thread, Unlocked Desktop Processor',
-        price: '$299',
-        image: './Img/Ryzen7.jpeg',
-        rating: 5,
-    },
-    {
-        id: 2,
-        name: 'NVIDIA GeForce RTX 3080',
-        description: '10GB GDDR6X, Ray Tracing, DLSS, PCIe 4.0',
-        price: '$699',
-        image: './Img/RTX_3080.jpg',
-        rating: 4,
-    },{},{},{},{},{},{},{}
-]
-function ShopPcHardware() {
+
+function StoreHardware({loggedIn, products}) {
     const sliderRef = useRef(null);
 
     const scroll = (direction) => {
@@ -35,12 +17,13 @@ function ShopPcHardware() {
     };
     return (
         <div className={styles.screen}>
-            <Navbar/>
+            <Navbar loggedIn={loggedIn} onScreenUrl={"/store/pc-hardware"}/>
+
             <div className={styles.shopContainer}>
                 <div className={styles.carouselControls}>
                     <button className={styles.scrollButton} onClick={() => scroll("left")}>◀</button>
                     <div className={styles.slider} ref={sliderRef}>
-                        {pcProducts.map((product) => (
+                        {products.map((product) => (
                             <div key={product.id} className={styles.card}>
                                 <img
                                     src={product.image}
@@ -62,4 +45,5 @@ function ShopPcHardware() {
         </div>
     );
 }
-export default ShopPcHardware;
+
+export default StoreHardware;

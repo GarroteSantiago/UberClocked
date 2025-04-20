@@ -1,8 +1,8 @@
-import PopUpTextButton from "../../components/profile/PopUpTextButton.jsx";
-import DataField from "../../components/form/DataField.jsx";
+import PopUpTextButton from "../../../components/profile/PopUpTextButton.jsx";
+import DataField from "../../../components/form/DataField.jsx";
 
 export default {
-    title: "Components/Profile/PopUpTextButton",
+    title: "Components/Button/PopUpTextButton",
     component: PopUpTextButton,
 }
 
