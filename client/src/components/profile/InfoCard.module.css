@@ -33,6 +33,7 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(255,255,255,0.5) rgba(255,255,255,0.1);
 }
+
 .text{
     text-align: start;
     font-size: 20px;

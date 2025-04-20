@@ -7,10 +7,11 @@ export default {
 };
 
 const product ={
+    id: 1,
     image: "/nonFile",
     alt: "Template",
-    title: "Placeholder product",
-    description: "This is a placeholder product",
+    name: "Placeholder product",
+    description: "Lorem ipsum dolor sit amet consectetur sadipscing elit, sed do eiusmod consetetur. Lorem ipsum dolor sit amet consectetur sadipscing elit, sed do eiusmod consetetur.",
     rating: 5,
     price: "0000.00",
 }

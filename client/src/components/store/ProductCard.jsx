@@ -5,10 +5,10 @@ import Stars from "../Buttons_and_others/Stars.jsx";
 function ProductCard({product}) {
     return (
         <>
-            <div className={styles.productCard}>
+            <div key={product.id} className={styles.productCard}>
                 <img src={product.image} alt={product.alt} className={styles.productImage} />
                 <div className={styles.productInfo}>
-                    <h2 className={styles.productName}>{product.title}</h2>
+                    <h2 className={styles.productName}>{product.name}</h2>
                     <p className={styles.productDescription}>{product.description}</p>
                     <Stars initialRating={product.rating}/>
                     <p className={styles.productPrice}>{product.price}</p>

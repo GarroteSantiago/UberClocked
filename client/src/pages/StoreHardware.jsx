@@ -2,6 +2,7 @@ import React, {useRef} from 'react';
 import styles from "./StoreHardware.module.css";
 import Navbar from "../components/navBar/Navbar.jsx";
 import Stars from "../components/Buttons_and_others/Stars.jsx";
+import ProductCard from "../components/store/ProductCard.jsx";
 
 
 function StoreHardware({loggedIn, products}) {
@@ -24,19 +25,7 @@ function StoreHardware({loggedIn, products}) {
                     <button className={styles.scrollButton} onClick={() => scroll("left")}>◀</button>
                     <div className={styles.slider} ref={sliderRef}>
                         {products.map((product) => (
-                            <div key={product.id} className={styles.card}>
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className={styles.image}
-                                />
-                                <div className={styles.info}>
-                                    <h2>{product.name}</h2>
-                                    <p>{product.description}</p>
-                                    <Stars initialRating={product.rating}/>
-                                    <p className={styles.price}>{product.price}</p>
-                                </div>
-                            </div>
+                            <ProductCard product={product}/>
                         ))}
                     </div>
                     <button className={styles.scrollButton} onClick={() => scroll("right")}>▶</button>
