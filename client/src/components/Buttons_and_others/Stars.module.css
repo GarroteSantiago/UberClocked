@@ -3,13 +3,16 @@
     gap: 5px;
     cursor: pointer;
     font-size: 2rem;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .star {
-    color: #FFFFFF;
+    color: #0A060D;
     transition: color 0.2s;
 }
 
 .star.filled {
-    color: #0A060D;
+    color: #ffd700;
 }

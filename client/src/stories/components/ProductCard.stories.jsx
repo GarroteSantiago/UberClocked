@@ -11,6 +11,7 @@ const product ={
     alt: "Template",
     title: "Placeholder product",
     description: "This is a placeholder product",
+    rating: 5,
     price: "0000.00",
 }
 
