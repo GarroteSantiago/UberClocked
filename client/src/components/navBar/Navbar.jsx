@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import styles from "./Navbar.module.css";
 import SmallLogo from "../logo/SmallLogo.jsx";
 import DropDownMenuButton from "../dropDownMenu/DropDownMenuButton.jsx";
@@ -7,15 +7,14 @@ import DropDownMenuItem from "../dropDownMenu/DropDownMenuItem.jsx";
 import DropDownMenuTextButton from "../dropDownMenu/DropDownMenuTextButton.jsx";
 import ImageButton from "../Buttons_and_others/ImageButton.jsx";
 import TextButton from "../Buttons_and_others/TextButton.jsx";
-import AuthContext from "../authentication/AuthContext.jsx";
+import {useAuth} from "../authentication/AuthContext.jsx";
 
 function Navbar({onScreenUrl}) {
-
-    const authed = useContext(AuthContext);
+    const { isAuthenticated } = useAuth();
 
     let options = <></>
 
-    if (authed===true) {
+    if (isAuthenticated) {
         options =
             <div className={styles.imageOptions}>
                 <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="/profile"/>
@@ -29,7 +28,6 @@ function Navbar({onScreenUrl}) {
             </div>
     }
 
-
     return (
         <>
             <nav className={styles.navbar}>
@@ -37,7 +35,7 @@ function Navbar({onScreenUrl}) {
                     <SmallLogo/>
                 </div>
                 <div className={styles.options}>
-                    <DropDownMenuTextButton text="Home" url="/" onScreenUrl={onScreenUrl}/>
+                    <DropDownMenuTextButton text="Home" url="/home" onScreenUrl={onScreenUrl}/>
                     <DropDownMenuButton menuTitle={"Store"}>
                         <DropDownMenu>
                             <DropDownMenuItem optionText="PC Hardware" optionUrl="/store/pc-hardware" onScreenUrl={onScreenUrl}/>

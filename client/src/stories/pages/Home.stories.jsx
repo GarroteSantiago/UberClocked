@@ -17,6 +17,4 @@ const Template = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
-    loggedIn: false,
-}
+Default.args = {}

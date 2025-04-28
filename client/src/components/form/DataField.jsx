@@ -1,20 +1,13 @@
 import React from 'react';
 import styles from './DataField.module.css';
 
-function DataField({fieldName, fieldType, id, value, onChange}) {
+function DataField({fieldName, fieldType, id}) {
     return (
-        <div className={styles.container}>
-            <input
-                className = {styles.dataField}
-                key={id}
-                type={fieldType}
-                value={value}
-                onChange={onChange}
-                id={id}
-                name={id}
-                placeholder={fieldName} />
-        </div>
-    );
+        <>
+            <div className={styles.container}>
+                <input key={id} className={styles.dataField} type={fieldType} placeholder={fieldName} />
+            </div>
+        </>
+    )
 }
-
 export default DataField;

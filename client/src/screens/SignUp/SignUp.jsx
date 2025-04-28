@@ -31,17 +31,16 @@ function SignUp() {
         action: () => alert('Button clicked')
     }
     const textButton={}
-
+    const queryUrl="/api/sign-up"
 
     return (
         <div className={style.screen}>
             <Form
                 title={title}
                 fields={fields}
-                formData={formData}
-                setFormData={setFormData}
                 commonButton={commonButton}
                 textButton={textButton}
+                queryUrl={queryUrl}
             />
         </div>
     )
