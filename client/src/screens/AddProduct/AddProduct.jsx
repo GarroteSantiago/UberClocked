@@ -1,11 +1,11 @@
 import React from 'react';
 import Form from "../../components/form/Form.jsx";
-import CommonButton from "../../components/Buttons_and_others/CommonButton.jsx";
 import Navbar from "../../components/navBar/Navbar.jsx";
-import DataField from "../../components/form/DataField.jsx";
-
+import styles from "./AddProduct.module.css";
 function AddProduct() {
-    const commonButton = <CommonButton text={"Load"}/>
+    const commonButton = {
+    text: "Add Product",
+}
     const redirectUrl = "/add-product";
     const queryUrl = "/add-product";
 
@@ -43,15 +43,16 @@ function AddProduct() {
     ]
 
     return (
-        <>
-            <Navbar onScreenUrl={"/add-product"}/>
-            <Form
-                title="Add Product"
-                fields={fields}
-                commonButton={commonButton}
-                queryUrl={queryUrl}
-                redirectUrl={redirectUrl}
-            />
-        </>
+        <div className={styles.screen}>
+                <Navbar onScreenUrl={"/add-product"}/>
+                <Form
+                    title="Add Product"
+                    fields={fields}
+                    commonButton={commonButton}
+                    textButton={{}}
+                    queryUrl={queryUrl}
+                    redirectUrl={redirectUrl}
+                />
+        </div>
     )
 } export default AddProduct;
