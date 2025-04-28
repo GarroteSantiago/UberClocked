@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './TextButtonForm.module.css';
+import { Link } from 'react-router-dom';
 
-function TextButtonForm({text}) {
+function TextButtonForm({text, url}) {
     return (
-        <button type="submit" className={styles.textButtonForm}>{text}</button>
+        <Link className={styles.textButtonForm} to={url} >{text}</Link>
     )
 }
 export default TextButtonForm;
