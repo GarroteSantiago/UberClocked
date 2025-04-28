@@ -2,7 +2,7 @@
     display: inline;
     width: 100%;
     font-family: Inconsolata, monospace;
-    font-size: 30px;
+    font-size: clamp(1rem, 2vw, 2rem);
     color: #C9302C;
     align-self: center;
     background-color: transparent;

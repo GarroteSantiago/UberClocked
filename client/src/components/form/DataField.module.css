@@ -7,20 +7,23 @@
 
 .dataField {
     caret-color: transparent;
-    width: 300px;
-    height: 55px;
+    width: 100%;
+    max-width: 15rem;
+    height: 3rem;
     border: 1px solid #FFFFFF;
     border-radius: 14px;
     color: rgba(255, 255, 255, 0.2);
     background-color: #0D0811;
-    font-size: 30px;
+    font-size: clamp(0.8rem, 1.5rem, 2rem);
     text-align: center;
     font-family: Inconsolata, monospace;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .dataField::placeholder {
     color: #FFFFFF;
-    opacity: 20%;
-    font-size: 30px;
+    opacity: 0.2;
+    font-size: clamp(0.8rem, 1.5rem, 2rem);
 }
 

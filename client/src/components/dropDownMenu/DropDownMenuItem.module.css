@@ -1,23 +1,23 @@
 .dropDownMenuItemContainer {
     display: flex;
     position: relative;
-    height: 98px;
+    height: fit-content;
     width: 100%;
     white-space: nowrap;
-    padding: 24px 0;
-    margin: 0 24px;
+    padding: 1.5rem 0;
+    margin: 0 1.5rem;
     font-family: Inconsolata, monospace;
-    font-size: 30px;
+    font-size: clamp(0.5rem, 1rem, 2rem);;
     font-style: normal;
     font-weight: bold;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .dropDownMenuItemContainer a, a:visited, a:hover, a:active {
-    width: fit-content;
-    height: fit-content;
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 .isSelected a, a:visited, a:hover, a:active{

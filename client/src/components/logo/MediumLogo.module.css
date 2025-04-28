@@ -1,12 +1,12 @@
 .logoContainer {
-    width: fit-content;
-    height: fit-content;
+    width: 20rem;
+    height: 5rem;
     justify-content: center;
+    align-items: center;
     display: flex;
 }
 
 .logoContainer img {
-    width: 335px;
-    height: 135px;
-    display: block;
+    width: 100%;
+    height: 100%;
 }

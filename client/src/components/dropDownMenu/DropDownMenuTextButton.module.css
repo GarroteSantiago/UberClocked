@@ -2,7 +2,7 @@
     cursor: pointer;
     color: #FFFFFF;
     font-family: Inconsolata, monospace;
-    font-size: 40px;
+    font-size: clamp(0.5rem, 1rem, 2rem);;
     text-decoration: none;
 }
 
@@ -10,6 +10,6 @@
     cursor: default;
     color: rgba(255, 255, 255, 0.23);
     font-family: Inconsolata, monospace;
-    font-size: 40px;
+    font-size: clamp(0.5rem, 1rem, 2rem);;
     text-decoration: none;
 }

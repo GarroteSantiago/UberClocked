@@ -1,6 +1,6 @@
 .TextButton, .TextButton:visited, .textButton:active, .textButton:hover  {
     color: #76386C;
     font-family: Inconsolata, monospace;
-    font-size: 40px;
+    font-size: clamp(0.5rem, 1rem, 1.5rem);
     text-decoration: none;
 }

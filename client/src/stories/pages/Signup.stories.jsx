@@ -1,10 +1,10 @@
 import React from "react";
-import Signup from "../../pages/Signup.jsx";
+import SignUp from "../../screens/SignUp.jsx";
 import { BrowserRouter } from "react-router-dom"; // Import Router
 
 export default {
-    title: "Pages/Signup",
-    component: Signup,
+    title: "Pages/SignUp",
+    component: SignUp,
     parameters: {
         layout: "fullscreen",
     }
@@ -12,7 +12,7 @@ export default {
 
 const Template = (args) => (
     <BrowserRouter>
-        <Signup {...args} />
+        <SignUp {...args} />
     </BrowserRouter>
 );
 

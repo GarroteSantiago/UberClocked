@@ -1,16 +1,18 @@
 .dropDownMenu {
     display: flex;
-    position: absolute;
-    top: calc(100% + 25px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: fit-content;
+    height: fit-content;
+    position: absolute;
+    font-size: clamp(1rem, 2vw, 2rem);
+    top: calc(100% + 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
     background-color: #140c1c;
-    min-width: 160px;
+    min-width: 10rem;
 }
 
 .dropDownMenu > *:not(:last-child) {

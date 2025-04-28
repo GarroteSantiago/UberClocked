@@ -1,13 +1,14 @@
 .navbar {
     display: inline-flex;
     flex-direction: row;
-    width: 100%;
+    width: 97%;
+    height: fit-content;
     align-items: center;
     justify-content: space-between;
     font-family: Inconsolata, monospace;
     background-color: rgba(0, 0, 0, 0.23);
     margin: 0;
-    padding: 0 32px;
+    padding: 0 2rem;
 }
 
 .navbar img{
@@ -20,13 +21,13 @@
     align-items: center;
     justify-content: flex-start;
     border-right: #76386C 1px solid;
-    height: 95px;
+    height: fit-content;
     padding: 0 100px 0 0;
 }
 
 .options {
     display: flex;
-    gap: 120px;
+    gap: 8rem;
     align-items: center;
     justify-content: center;
     padding: 35px 100px;
@@ -35,9 +36,9 @@
 .textOptions{
     display: flex;
     flex-direction: row;
-    height: 95px;
-    gap: 30px;
-    padding: 0 60px;
+    height: fit-content;
+    gap: 2rem;
+    padding: 0 0 0 4rem;
     align-items: center;
     border-left: #76386C 1px solid;
 }
@@ -47,9 +48,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: end;
-    gap: 100px;
-    padding: 0 100px;
-    height: 95px;
+    gap: 3rem;
+    padding: 0 0 0 4rem;
+    height: fit-content;
     margin: 0;
     border-left: #76386C 1px solid;
 }

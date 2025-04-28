@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
-import Home from "../../pages/Home.jsx";
+import Home from "../../screens/Home.jsx";
 
 export default {
     title: "Pages/Home",

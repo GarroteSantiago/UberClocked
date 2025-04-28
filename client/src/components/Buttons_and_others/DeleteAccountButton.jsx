@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './DeleteAccountButton.module.css';
 
-function DeleteAccountButton({onclick}) {
+function DeleteAccountButton({onClick}) {
     return (
-        <button onClick={onclick} className={style.DeleteButton}>Delete your account</button>
+        <button onClick={onClick} className={style.DeleteButton}>Delete your account</button>
     )
 }
 export default DeleteAccountButton;

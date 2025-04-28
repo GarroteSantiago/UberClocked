@@ -1,5 +1,5 @@
 import React from "react";
-import UserProfile from "../../pages/UserProfile.jsx";
+import UserProfile from "../../screens/UserProfile.jsx";
 
 export default {
     title: "Pages/UserProfile",

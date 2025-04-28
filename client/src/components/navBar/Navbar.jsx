@@ -1,5 +1,5 @@
 import React from "react";
-    import styles from "./Navbar.module.css";
+import styles from "./Navbar.module.css";
 import SmallLogo from "../logo/SmallLogo.jsx";
 import DropDownMenuButton from "../dropDownMenu/DropDownMenuButton.jsx";
 import DropDownMenu from "../dropDownMenu/DropDownMenu.jsx";
@@ -15,14 +15,14 @@ function Navbar({loggedIn, onScreenUrl}) {
     if (loggedIn===true) {
         options =
             <div className={styles.imageOptions}>
-                <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="#"/>
-                <ImageButton image="/ShoppingCart.svg" alt="Shopping cart" url="#"/>
+                <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="profile"/>
+                <ImageButton image="/ShoppingCart.svg" alt="Shopping cart" url="shopping-cart"/>
             </div>
     } else {
         options =
             <div className={styles.textOptions}>
-                <TextButton text="Login" url="#"></TextButton>
-                <TextButton text="Sign up" url="#"></TextButton>
+                <TextButton text="Login" url="login"></TextButton>
+                <TextButton text="Sign up" url="sign-up"></TextButton>
             </div>
     }
 
@@ -35,7 +35,7 @@ function Navbar({loggedIn, onScreenUrl}) {
                     <SmallLogo/>
                 </div>
                 <div className={styles.options}>
-                    <DropDownMenuTextButton text="Home" url="/home" onScreenUrl={onScreenUrl}/>
+                    <DropDownMenuTextButton text="Home" url="/" onScreenUrl={onScreenUrl}/>
                     <DropDownMenuButton menuTitle={"Store"}>
                         <DropDownMenu>
                             <DropDownMenuItem optionText="PC Hardware" optionUrl="/store/pc-hardware" onScreenUrl={onScreenUrl}/>

@@ -1,8 +1,8 @@
 import React from 'react';
-import style from './Signup.module.css';
+import style from './SignUp.module.css';
 import Form from "../components/form/Form.jsx";
 
-function Signup() {
+function SignUp() {
     const title = "SignUp";
     const fields= [
         {
@@ -44,4 +44,4 @@ function Signup() {
         </div>
     )
 }
-export default Signup;
+export default SignUp;

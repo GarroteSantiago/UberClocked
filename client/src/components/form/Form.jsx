@@ -8,21 +8,23 @@ import MediumLogo from "../logo/MediumLogo.jsx"
 
 function Form({title, fields, commonButton, textButton}) {
     return (
-        <div className={styles.formContainer}>
-            <MediumLogo />
-            < FormTitle text={title} />
-            <form>
-                {
-                    fields.map(
-                        field => (
-                            <DataField fieldName={field.fieldName} fieldType={field.fieldType} id={field.id} />
+        <>
+            <div className={styles.formContainer}>
+                <MediumLogo />
+                < FormTitle text={title} />
+                <form>
+                    {
+                        fields.map(
+                            field => (
+                                <DataField fieldName={field.fieldName} fieldType={field.fieldType} id={field.id} />
+                            )
                         )
-                    )
-                }
-            </form>
-            <CommonButton text={commonButton.text} action={commonButton.action} />
-            <TextButtonForm text={textButton.text} url={textButton.url}/>
-        </div>
+                    }
+                </form>
+                <CommonButton text={commonButton.text} action={commonButton.action} />
+                <TextButtonForm text={textButton.text} url={textButton.url}/>
+            </div>
+        </>
     )
 }
 export default Form;

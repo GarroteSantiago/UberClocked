@@ -1,21 +1,26 @@
 .formContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
     width: fit-content;
     height: fit-content;
-    padding: 20px 50px 0 50px;
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 34px;
-    background-color: transparent;
+    max-height: 100vh;
+    padding: 1rem 3rem 0 3rem;
+    gap: 2rem;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 0, 0.23);
 }
 
 .formContainer form {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 34px;
+    display: flex;
+    flex-direction: column;
+    max-width: 66%;
+    max-height: 33%;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
     background-color: transparent;
-}
-
-.formContainer h2 {
-    margin: 30px 0;
+    overflow-y: scroll;
 }

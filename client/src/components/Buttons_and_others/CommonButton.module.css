@@ -1,15 +1,17 @@
 .commonButton{
+    width: auto;
+    min-width: 8rem;
+    height: auto;
+    min-height: 2.5rem;
     margin: 1rem;
+    padding: 0.5em 1em;
     cursor: pointer;
     background-color: #393039;
     color: #FFFFFF;
     border: none;
     border-radius: 14px;
-    width: 152px;
-    height: 45px;
-    font-size: 20px;
+    font-size: clamp(1rem, 2vw, 2rem);
     text-align: center;
     font-family: Inconsolata, monospace;
     font-style: normal;
-
 }
