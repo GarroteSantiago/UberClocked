@@ -7,7 +7,11 @@ import TextButtonForm from "./TextButtonForm.jsx";
 import MediumLogo from "../logo/MediumLogo.jsx";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function Form({title, fields, commonButton, textButton, formData, setFormData}) {
+=======
+function Form({ title, fields, commonButton, textButton, formData, setFormData }) {
+>>>>>>> 1ba1de9 (me la como)
     const handleChange = (event) => {
         const {id, value} = event.target;
         setFormData(prevData => ({
@@ -15,9 +19,12 @@ function Form({title, fields, commonButton, textButton, formData, setFormData}) 
             [id]: value
         }));
     }
+<<<<<<< HEAD
 =======
 function Form({ title, fields, commonButton, textButton }) {
 >>>>>>> 4c20a9a (.)
+=======
+>>>>>>> 1ba1de9 (me la como)
     return (
         <>
             <div className={styles.formContainer}>
@@ -36,6 +43,7 @@ function Form({ title, fields, commonButton, textButton }) {
                                     fieldName={field.fieldName}
                                     fieldType={field.fieldType}
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     value={FormData[field.id]}
                                     onChange={handleChange}
                                     id={field.id}/>
@@ -45,6 +53,11 @@ function Form({ title, fields, commonButton, textButton }) {
                                     onChange={field.onChange}
                                 />
 >>>>>>> 4c20a9a (.)
+=======
+                                    value={FormData[field.id]}
+                                    onChange={handleChange}
+                                    id={field.id}/>
+>>>>>>> 1ba1de9 (me la como)
                             )
                         )
                     }
