@@ -4,69 +4,27 @@ import FormTitle from "./FormTitle.jsx";
 import DataField from "./DataField.jsx";
 import CommonButton from "../Buttons_and_others/CommonButton.jsx";
 import TextButtonForm from "./TextButtonForm.jsx";
-import MediumLogo from "../logo/MediumLogo.jsx";
+import MediumLogo from "../logo/MediumLogo.jsx"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-function Form({title, fields, commonButton, textButton, formData, setFormData}) {
-=======
-function Form({ title, fields, commonButton, textButton, formData, setFormData }) {
->>>>>>> 1ba1de9 (me la como)
-    const handleChange = (event) => {
-        const {id, value} = event.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [id]: value
-        }));
-    }
-<<<<<<< HEAD
-=======
-function Form({ title, fields, commonButton, textButton }) {
->>>>>>> 4c20a9a (.)
-=======
->>>>>>> 1ba1de9 (me la como)
+function Form({title, fields, commonButton, textButton}) {
     return (
         <>
             <div className={styles.formContainer}>
                 <MediumLogo />
-                <FormTitle text={title} />
+                < FormTitle text={title} />
                 <form>
                     {
                         fields.map(
-<<<<<<< HEAD
                             field => (
-=======
-                            (field) => (
->>>>>>> 4c20a9a (.)
-                                <DataField
-                                    key={field.id}
-                                    fieldName={field.fieldName}
-                                    fieldType={field.fieldType}
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    value={FormData[field.id]}
-                                    onChange={handleChange}
-                                    id={field.id}/>
-=======
-                                    id={field.id}
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                />
->>>>>>> 4c20a9a (.)
-=======
-                                    value={FormData[field.id]}
-                                    onChange={handleChange}
-                                    id={field.id}/>
->>>>>>> 1ba1de9 (me la como)
+                                <DataField fieldName={field.fieldName} fieldType={field.fieldType} id={field.id} />
                             )
                         )
                     }
                 </form>
                 <CommonButton text={commonButton.text} action={commonButton.action} />
-                <TextButtonForm text={textButton.text} url={textButton.url} />
+                <TextButtonForm text={textButton.text} url={textButton.url}/>
             </div>
         </>
-    );
+    )
 }
-
 export default Form;
