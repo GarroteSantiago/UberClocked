@@ -1,8 +1,8 @@
 import "./App.css"
-import Start from "./screens/Start.jsx";
-import Home from "./screens/Home.jsx";
-import SignUp from "./screens/SignUp.jsx";
-import Login from "./screens/Login.jsx";
+import Start from "./screens/Start/Start.jsx";
+import Home from "./screens/Home/Home.jsx";
+import SignUp from "./screens/SignUp/SignUp.jsx";
+import Login from "./screens/Login/Login.jsx";
 import {Route, Routes} from "react-router-dom";
 
 function App() {

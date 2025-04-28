@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "../../screens/Login.jsx";
+import Login from "../../screens/Login/Login.jsx";
 import { BrowserRouter } from "react-router-dom"; // Import Router
 
 export default {

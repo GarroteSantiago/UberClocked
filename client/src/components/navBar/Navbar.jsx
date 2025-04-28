@@ -35,7 +35,7 @@ function Navbar({onScreenUrl}) {
                     <SmallLogo/>
                 </div>
                 <div className={styles.options}>
-                    <DropDownMenuTextButton text="Home" url="/" onScreenUrl={onScreenUrl}/>
+                    <DropDownMenuTextButton text="Home" url="/home" onScreenUrl={onScreenUrl}/>
                     <DropDownMenuButton menuTitle={"Store"}>
                         <DropDownMenu>
                             <DropDownMenuItem optionText="PC Hardware" optionUrl="/store/pc-hardware" onScreenUrl={onScreenUrl}/>

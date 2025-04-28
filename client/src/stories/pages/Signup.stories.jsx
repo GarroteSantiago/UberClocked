@@ -1,5 +1,5 @@
 import React from "react";
-import SignUp from "../../screens/SignUp.jsx";
+import SignUp from "../../screens/SignUp/SignUp.jsx";
 import { BrowserRouter } from "react-router-dom"; // Import Router
 
 export default {

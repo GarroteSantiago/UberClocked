@@ -1,15 +1,11 @@
 import React from 'react';
-import style from './SignUp.module.css';
-import Form from "../components/form/Form.jsx";
+import style from './Login.module.css'
+import Form from "../../components/form/Form.jsx";
 
-function SignUp() {
-    const title = "SignUp";
+function Login() {
+
+    const title = "Login";
     const fields= [
-        {
-            fieldName: "Username",
-            fieldType: "text",
-            id: "username"
-        },
         {
             fieldName: "Email",
             fieldType: "email",
@@ -19,18 +15,17 @@ function SignUp() {
             fieldName: "Password",
             fieldType: "password",
             id: "password"
-        },
-        {
-            fieldName: "Confirm Password",
-            fieldType: "password",
-            id: "re-password"
         }
     ]
     const commonButton={
-        text: "SignUp",
+        text: "Login",
         action: () => alert('Button clicked')
     }
-    const textButton={}
+    const textButton={
+        text: "Forgot password",
+        url: "placeHolder"
+    }
+    const queryUrl="/api/login";
 
 
     return (
@@ -40,8 +35,9 @@ function SignUp() {
                 fields={fields}
                 commonButton={commonButton}
                 textButton={textButton}
+                queryUrl={queryUrl}
             />
         </div>
     )
 }
-export default SignUp;
+export default Login;

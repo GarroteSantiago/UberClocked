@@ -6,13 +6,13 @@ import CommonButton from "../Buttons_and_others/CommonButton.jsx";
 import TextButtonForm from "./TextButtonForm.jsx";
 import MediumLogo from "../logo/MediumLogo.jsx"
 
-function Form({title, fields, commonButton, textButton}) {
+function Form({title, fields, commonButton, textButton, queryUrl}) {
     return (
         <>
             <div className={styles.formContainer}>
                 <MediumLogo />
-                < FormTitle text={title} />
-                <form>
+                <FormTitle text={title} />
+                <form action={queryUrl} method="POST">
                     {
                         fields.map(
                             field => (
@@ -22,7 +22,7 @@ function Form({title, fields, commonButton, textButton}) {
                     }
                 </form>
                 <CommonButton text={commonButton.text} action={commonButton.action} />
-                <TextButtonForm text={textButton.text} url={textButton.url}/>
+                <TextButtonForm text={textButton.text}/>
             </div>
         </>
     )
