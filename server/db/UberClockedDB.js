@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
+const {promise} = require("bcrypt/promises");
 
 dotenv.config();
 
@@ -11,7 +12,8 @@ const db = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    port: process.env.DB_PORT,
+    port: process.env.PORT,
 });
+
 
 module.exports = db;

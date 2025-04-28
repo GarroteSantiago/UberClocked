@@ -49,7 +49,7 @@ app.post('/api/sign-up', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const [result] = await db.query(
-            'INSERT INTO user (username, password, email) VALUES (?, ?, ?)',
+            'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
             [username, password, email]
         );
         res.status(201).json({ message: 'User created', userId: result.insertId });
