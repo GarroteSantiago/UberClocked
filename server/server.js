@@ -37,22 +37,21 @@ app.get('/api/users/:username', async (req, res) => {
 
 app.post('/api/sign-up', async (req, res) => {
     const { username, password, email, confirmPassword } = req.body;
-    if (!username || !password || !email || !confirmPassword) {
-        console.log(username, password, email, confirmPassword);
+    if (!username || !password || !email ) {
+        console.log(username, password, email);
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
-        if(password !== confirmPassword) {
+        /*if(password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
-        }
+        }*/
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const [result] = await db.query(
-            'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
-            [username, hashedPassword, email]
+            'INSERT INTO user (username, password, email) VALUES (?, ?, ?)',
+            [username, password, email]
         );
-
         res.status(201).json({ message: 'User created', userId: result.insertId });
     } catch (error) {
         console.error('Error signing up user:', error);
