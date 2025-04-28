@@ -38,6 +38,5 @@ const pcProducts = [
 
 export const Default = Template.bind({});
 Default.args = {
-    loggedIn: true,
     products: pcProducts
 }

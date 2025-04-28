@@ -9,8 +9,8 @@ function Start() {
             <LargeLogo/>
             <div className={styles.textOptions}>
                 <TextButton text={" Login |"} url={"/login"} />
-                <TextButton text={" SignUp |"} url={"/signup"} />
-                <TextButton text={" Guest"} url={"/homeGuest"} />
+                <TextButton text={" SignUp |"} url={"/sign-up"} />
+                <TextButton text={" Guest"} url={"/home"} />
             </div>
         </div>
     )

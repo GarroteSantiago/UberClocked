@@ -7,26 +7,26 @@ import DropDownMenuItem from "../dropDownMenu/DropDownMenuItem.jsx";
 import DropDownMenuTextButton from "../dropDownMenu/DropDownMenuTextButton.jsx";
 import ImageButton from "../Buttons_and_others/ImageButton.jsx";
 import TextButton from "../Buttons_and_others/TextButton.jsx";
+import {useAuth} from "../authentication/AuthContext.jsx";
 
-function Navbar({loggedIn, onScreenUrl}) {
+function Navbar({onScreenUrl}) {
+    const { isAuthenticated } = useAuth();
 
     let options = <></>
 
-    if (loggedIn===true) {
+    if (isAuthenticated) {
         options =
             <div className={styles.imageOptions}>
-                <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="profile"/>
-                <ImageButton image="/ShoppingCart.svg" alt="Shopping cart" url="shopping-cart"/>
+                <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="/profile"/>
+                <ImageButton image="/ShoppingCart.svg" alt="Shopping cart" url="/shopping-cart"/>
             </div>
     } else {
         options =
             <div className={styles.textOptions}>
-                <TextButton text="Login" url="login"></TextButton>
-                <TextButton text="Sign up" url="sign-up"></TextButton>
+                <TextButton text="Login" url="/login"></TextButton>
+                <TextButton text="Sign up" url="/sign-up"></TextButton>
             </div>
     }
-
-
 
     return (
         <>

@@ -1,9 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext();
+const AuthContext = createContext(undefined);
 
 export function AuthProvider({ children }) {
     const [token, setToken] = useState(null);
+    const [isTokenValid, setIsTokenValid] = useState(false);
 
     const login = async (email, password) => {
         const response = await fetch('http://localhost:3000/api/login', {
@@ -19,37 +20,60 @@ export function AuthProvider({ children }) {
         const data = await response.json();
         setToken(data.token);
         localStorage.setItem('authToken', data.token);
+        setIsTokenValid(true);
     };
 
     const logout = () => {
         setToken(null);
         localStorage.removeItem('authToken');
+        setIsTokenValid(false);
     };
 
-    const verifyToken = async () => {
-        const storedToken = localStorage.getItem('authToken');
-        if (!storedToken) return false;
+    const verifyStoredToken = async (storedToken) => {
+        try {
+            const response = await fetch('http://localhost:5000/api/verify-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${storedToken}`,
+                },
+            });
 
-        const response = await fetch('http://localhost:5000/api/verify-token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${storedToken}`,
-            },
-        });
+            if (!response.ok) {
+                logout();
+                return false;
+            }
 
-        if (!response.ok) {
+            const data = await response.json();
+            if (data.valid) {
+                setToken(storedToken);
+                setIsTokenValid(true);
+                return true;
+            } else {
+                logout();
+                return false;
+            }
+        } catch (error) {
+            console.error('Error verifying token:', error);
             logout();
             return false;
         }
-
-        const data = await response.json();
-        setToken(storedToken);
-        return data.valid;
     };
 
+    useEffect(() => {
+        const initAuth = async () => {
+            const storedToken = localStorage.getItem('authToken');
+            if (storedToken) {
+                await verifyStoredToken(storedToken);
+            }
+        };
+        initAuth();
+    }, []);
+
+    const isAuthenticated = token !== null && isTokenValid;
+
     return (
-        <AuthContext.Provider value={{ token, login, logout, verifyToken }}>
+        <AuthContext.Provider value={{ token, login, logout, isAuthenticated }}>
             {children}
         </AuthContext.Provider>
     );

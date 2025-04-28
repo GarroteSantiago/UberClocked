@@ -6,10 +6,10 @@ import ProductCard from "../components/store/ProductCard.jsx";
 import ProductCarousel from "../components/store/ProductCarousel.jsx";
 
 
-function StoreHardware({loggedIn, products}) {
+function StoreHardware({products}) {
     return (
         <div className={styles.screen}>
-            <Navbar loggedIn={loggedIn} onScreenUrl={"/store/pc-hardware"}/>
+            <Navbar onScreenUrl={"/store/pc-hardware"}/>
             <ProductCarousel>
                 {products.map((product) => (
                     <ProductCard product={product}/>
