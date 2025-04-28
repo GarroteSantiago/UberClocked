@@ -9,19 +9,27 @@ function SignUp() {
         {
             fieldName: "Username",
             fieldType: "text",
-            id: "username"
+            id: "username",
+            name: "username",
         },
         {
             fieldName: "Email",
             fieldType: "email",
-            id: "email"
+            id: "email",
+            name: "email",
         },
         {
             fieldName: "Password",
             fieldType: "password",
-            id: "password"
+            id: "password",
+            name: "password"
         },
-
+        {
+            fieldName: "Confirm Password",
+            fieldType: "password",
+            id: "re-password",
+            name: "confirmPassword",
+        }
     ]
     const commonButton={
         text: "SignUp",

@@ -24,9 +24,10 @@ function Form({title, fields, commonButton, textButton, queryUrl, redirectUrl}) 
         try {
             const res = await fetch(queryUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
+                headers: { 'Content-Type': 'application/json' },  // ✅ CAMBIAR
+                body: JSON.stringify(formData),  // ✅ ENVIAR COMO JSON
             });
+
 
             if (res.ok) {
                 navigate(redirectUrl);
@@ -39,7 +40,6 @@ function Form({title, fields, commonButton, textButton, queryUrl, redirectUrl}) 
         }
     };
 
-
     return (
         <>
             <div className={styles.formContainer}>
@@ -48,13 +48,13 @@ function Form({title, fields, commonButton, textButton, queryUrl, redirectUrl}) 
                 <form onSubmit={handleSubmit}>
                     {
                         fields.map(field => (
-                                <DataField
+                            <DataField
                                 key={field.id}
                                 fieldName={field.fieldName}
                                 fieldType={field.fieldType}
                                 id={field.id}
-                                name={field.fieldName.toLowerCase()}
-                                value={formData[field.fieldName.toLowerCase()] || ''}
+                                name={field.name}
+                                value={formData[field.name] || ''}
                                 onChange={handleChange}
                             />
                         ))
