@@ -44,12 +44,12 @@ app.post('/api/sign-up', async (req, res) => {
         /*if(password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
         }*/
-        //const saltRounds = 10;
-        //const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const [result] = await db.query(
             'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
-            [username, password, email]
+            [username, hashedPassword, email]
         );
         return res.status(201).json({ message: 'User created', userId: result.insertId });
     } catch (error) {
@@ -71,8 +71,10 @@ app.post('/api/login', async (req, res) => {
         }
 
         const user = rows[0];
-        //const passwordMatch = await bcrypt.compare(password, user.password);
-        if (password === user.Password){
+        const passwordMatch = await bcrypt.compare(password, user.Password);
+
+        if (!passwordMatch){
+            console.log('a');
             return res.status(200).json({ message: 'Login successful', userId: user.user_id, username: user.Username });
         }
         return res.status(401).json({ message: 'Incorrect password' });
