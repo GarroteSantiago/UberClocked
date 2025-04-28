@@ -38,6 +38,7 @@ app.get('/api/users/:username', async (req, res) => {
 app.post('/api/sign-up', async (req, res) => {
     const { username, password, email, confirmPassword } = req.body;
     if (!username || !password || !email || !confirmPassword) {
+        console.log(username, password, email, confirmPassword);
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
