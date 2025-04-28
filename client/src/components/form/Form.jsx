@@ -6,10 +6,12 @@ import DataField from "./DataField.jsx";
 import CommonButton from "../Buttons_and_others/CommonButton.jsx";
 import TextButtonForm from "./TextButtonForm.jsx";
 import MediumLogo from "../logo/MediumLogo.jsx";
+import { useAuth } from "../authentication/AuthContext.jsx";
 
-function Form({title, fields, commonButton, textButton, queryUrl, redirectUrl}) {
+function Form({ title, fields, commonButton, textButton, queryUrl, redirectUrl }) {
     const [formData, setFormData] = useState({});
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleChange = (e) => {
         setFormData({
@@ -22,21 +24,25 @@ function Form({title, fields, commonButton, textButton, queryUrl, redirectUrl}) 
         e.preventDefault();
 
         try {
-            const res = await fetch(queryUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-
-
-            if (res.ok) {
+            if (title === "Login") {
+                await login(formData.email, formData.password);
                 navigate(redirectUrl);
             } else {
-                const errorData = await res.json();
-                alert(`Error: ${errorData.message || "Hubo un problema al enviar el formulario."}`);
+                const res = await fetch(queryUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+
+                if (res.ok) {
+                    navigate(redirectUrl);
+                } else {
+                    const errorData = await res.json();
+                    alert(`Error: ${errorData.message || "Hubo un problema al enviar el formulario."}`);
+                }
             }
         } catch (error) {
-            alert(`Error en la solicitud: ${error.message}`);
+            alert(`Error: ${error.message}`);
         }
     };
 
