@@ -234,8 +234,101 @@ app.delete('/api/products/:id', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+app.get('/api/components', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM components');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error getting components:', error);
+        res.status(500).json({ message: 'Error getting components' });
+    }
+});
+
+app.get('/api/components/:name', async (req, res) => {
+    const { name } = req.params;
+    try {
+        const [rows] = await db.query('SELECT * FROM components WHERE Name = ?', [name]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Component not found' });
+        }
+        return res.json(rows[0]);
+    } catch (error) {
+        console.error('Error getting component:', error);
+        res.status(500).json({ message: 'Error getting component' });
+    }
+});
+
+app.post('/api/components', async (req, res) => {
+    const { name, type, img } = req.body;
+    if (!name || !type) {
+        return res.status(400).json({ message: 'Name and type are required' });
+    }
+    try {
+        const [result] = await db.query(
+            'INSERT INTO components (name, type, img) VALUES (?, ?, ?)',
+            [name, type, img]
+        );
+        res.status(201).json({ message: 'Component created', componentId: result.insertId });
+    } catch (error) {
+        console.error('Error creating component:', error);
+        res.status(500).json({ message: 'Error creating component' });
+    }
+});
+
+app.patch('/api/components/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, type, img} = req.body;
+
+    try {
+        const fields = [];
+        const values = [];
+
+        if (name) {
+            fields.push('name = ?');
+            values.push(name);
+        }
+        if (type) {
+            fields.push('type = ?');
+            values.push(type);
+        }
+        if(img){
+            fields.push('img = ?')
+            values.push(img);
+        }
+
+        if (fields.length === 0) {
+            return res.status(400).json({ message: 'At least one field must be provided' });
+        }
+
+        values.push(id);
+
+        const query = `UPDATE components SET ${fields.join(', ')} WHERE Component_id = ?`;
+
+        const [result] = await db.query(query, values);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Component not found' });
+        }
+
+        res.json({ message: 'Component updated successfully' });
+    } catch (error) {
+        console.error('Error updating component:', error);
+        res.status(500).json({ message: 'Error updating component' });
+    }
+});
+
+app.delete('/api/components/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [result] = await db.query('DELETE FROM components WHERE Component_id = ?', [id]);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Component not found' });
+        }
+        res.json({ message: 'Component deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting component:', error);
+        res.status(500).json({ message: 'Error deleting component' });
+    }
 });
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -245,4 +338,8 @@ app.get('*', (req, res) => {
         return res.status(404).json({ message: 'API route not found' });
     }
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
