@@ -18,4 +18,5 @@ function DataField({fieldName, fieldType, id, value, onChange}) {
         </>
     )
 }
+
 export default DataField;

@@ -10,7 +10,7 @@ function Start() {
             <div className={styles.textOptions}>
                 <TextButton text={"Login"} url={"/login"} />
                 <TextButton text={"SignUp"} url={"/sign-up"} />
-                <TextButton text={"Guest"} url={"/guest-home"} />
+                <TextButton text={"Guest"} url={"/home"} />
             </div>
         </div>
     )
