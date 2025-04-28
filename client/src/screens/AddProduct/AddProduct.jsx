@@ -1,47 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Form from "../../components/form/Form.jsx";
 import CommonButton from "../../components/Buttons_and_others/CommonButton.jsx";
 import Navbar from "../../components/navBar/Navbar.jsx";
+import DataField from "../../components/form/DataField.jsx";
 
 function AddProduct() {
-    const [fields, setFields] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    const commonButton = <CommonButton text={"Load"} />;
+    const commonButton = <CommonButton text={"Load"}/>
     const redirectUrl = "/add-product";
     const queryUrl = "/add-product";
 
-    useEffect(() => {
-        async function fetchFields() {
-            try {
-                const response = await fetch('/api/columns');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch fields');
-                }
-                const data = await response.json();
-                setFields(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchFields();
-    }, []);
-
-    if (loading) {
-        return <p>Loading form...</p>;
-    }
-
-    if (error) {
-        return <p>Error loading form: {error}</p>;
-    }
+    const fields = [
+        {
+            id: "name",
+            fieldName: "Product name",
+            fieldType: "text",
+            name: "name",
+        },
+        {
+            id: "price",
+            fieldName: "Price",
+            fieldType: "number",
+            name: "price"
+        },
+        {
+            id: "componentType",
+            fieldName: "Component Type",
+            fieldType: "text",
+            name: "componentType",
+        },
+        {
+            id: "description",
+            fieldName: "Description",
+            fieldType: "text",
+            name: "description",
+        },
+        {
+            id: "availability",
+            fieldName: "stock",
+            fieldType: "checkbox",
+            name: "stock"
+        },
+    ]
 
     return (
         <>
-            <Navbar onScreenUrl={"/add-product"} />
+            <Navbar onScreenUrl={"/add-product"}/>
             <Form
                 title="Add Product"
                 fields={fields}
@@ -51,6 +54,4 @@ function AddProduct() {
             />
         </>
     )
-}
-
-export default AddProduct;
+} export default AddProduct;
