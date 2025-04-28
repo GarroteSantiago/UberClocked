@@ -35,7 +35,7 @@ app.get('/api/users/:username', async (req, res) => {
 });
 
 app.post('/api/sign-up', async (req, res) => {
-    const { username, password, email, confirmPassword } = req.body;
+    const { username, password, email} = req.body;
     if (!username || !password || !email ) {
         console.log(username, password, email);
         return res.status(400).json({ message: 'Missing information' });
@@ -59,25 +59,25 @@ app.post('/api/sign-up', async (req, res) => {
 });
 
 app.post('/api/login', async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
-        const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
 
         if (rows.length === 0) {
             return res.status(401).json({ message: 'User not found' });
         }
 
-        const user = rows[0];
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        //const user = rows[0];
+        //const passwordMatch = await bcrypt.compare(password, user.password);
 
-        if (!passwordMatch) {
+        if (password === rows[0].password) {
             return res.status(401).json({ message: 'Incorrect password' });
         }
 
-        res.status(200).json({ message: 'Login successful', userId: user.id, username: user.username });
+        res.status(200).json({ message: 'Login successful', userId: rows[0].id, username: rows[0].username });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Error logging in' });

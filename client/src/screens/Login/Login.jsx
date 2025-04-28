@@ -9,12 +9,14 @@ function Login() {
         {
             fieldName: "Email",
             fieldType: "email",
-            id: "email"
+            id: "email",
+            name: "email",
         },
         {
             fieldName: "Password",
             fieldType: "password",
-            id: "password"
+            id: "password",
+            name: "password"
         }
     ]
     const commonButton={
