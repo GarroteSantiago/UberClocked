@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -35,11 +36,14 @@ app.get('/api/users/:username', async (req, res) => {
 });
 
 app.post('/api/sign-up', async (req, res) => {
-    const { username, password, email } = req.body;
-    if (!username || !password || !email) {
+    const { username, password, email, confirmPassword } = req.body;
+    if (!username || !password || !email || !confirmPassword) {
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
+        if(password !== confirmPassword) {
+            return res.status(400).json({ message: 'Passwords do not match' });
+        }
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
