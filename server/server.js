@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const db = require('./db/UberClockedDB');
-const {join, join} = require("node:path");
 const app = express();
 const PORT = 5000;
 const path = require('path');
@@ -36,11 +35,14 @@ app.get('/api/users/:username', async (req, res) => {
 });
 
 app.post('/api/signup', async (req, res) => {
-    const { username, password, email } = req.body;
+    const { username, password, email, confirmPassword } = req.body;
     if (!username || !password || !email) {
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
+        if(password !== confirmPassword) {
+            return res.status(400).json({ message: 'Passwords do not match' });
+        }
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -235,10 +237,8 @@ app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 
-// SERVIR ARCHIVOS DE REACT
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// Para cualquier ruta que NO sea API, servir index.html de React
 app.get('*', (req, res) => {
     if (req.path.startsWith('/api')) {
         return res.status(404).json({ message: 'API route not found' });
