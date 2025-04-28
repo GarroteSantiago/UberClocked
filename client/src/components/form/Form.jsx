@@ -24,8 +24,8 @@ function Form({title, fields, commonButton, textButton, queryUrl, redirectUrl}) 
         try {
             const res = await fetch(queryUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },  // ✅ CAMBIAR
-                body: JSON.stringify(formData),  // ✅ ENVIAR COMO JSON
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
             });
 
 
