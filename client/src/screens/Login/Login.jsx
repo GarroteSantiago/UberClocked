@@ -21,14 +21,13 @@ function Login() {
     ]
     const commonButton={
         text: "Login",
-        action: () => alert('Button clicked')
     }
     const textButton={
         text: "Forgot password",
         url: "placeHolder"
     }
     const queryUrl="/api/login";
-
+    const redirectUrl="/home";
 
     return (
         <div className={style.screen}>
@@ -38,6 +37,7 @@ function Login() {
                 commonButton={commonButton}
                 textButton={textButton}
                 queryUrl={queryUrl}
+                redirectUrl={redirectUrl}
             />
         </div>
     )
