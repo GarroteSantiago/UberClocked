@@ -34,7 +34,7 @@ app.get('/api/users/:username', async (req, res) => {
     }
 });
 
-app.post('/api/signup', async (req, res) => {
+app.post('/api/sign-up', async (req, res) => {
     const { username, password, email } = req.body;
     if (!username || !password || !email) {
         return res.status(400).json({ message: 'Missing information' });
@@ -234,10 +234,8 @@ app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 
-// SERVIR ARCHIVOS DE REACT
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// Para cualquier ruta que NO sea API, servir index.html de React
 app.get('*', (req, res) => {
     if (req.path.startsWith('/api')) {
         return res.status(404).json({ message: 'API route not found' });
