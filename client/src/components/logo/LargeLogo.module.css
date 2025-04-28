@@ -3,10 +3,11 @@
     height: fit-content;
     justify-content: center;
     display: flex;
+    margin: 0 0 5rem 0;
 }
 
 .logoContainer img {
-    width: 524px;
-    height: 180px;
+    height: 8rem;
     display: block;
+    margin: auto;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './SignUp.module.css';
-import Form from "../components/form/Form.jsx";
+import Form from "../../components/form/Form.jsx";
 
 function SignUp() {
     const title = "SignUp";

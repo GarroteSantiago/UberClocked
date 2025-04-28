@@ -1,0 +1,27 @@
+.screen {
+    width: 100%;
+    height: 100%;
+    background-color: #0A060D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.textOptions{
+    display: inline;
+}
+
+.textOptions *{
+    padding: 0 1rem;
+}
+
+.textOptions *:first-child{
+    border-right: 1px solid #76386c;
+    padding-right: 1rem;
+}
+
+.textOptions *:last-child{
+    border-left: 1px solid #76386c;
+    padding-left: 1rem;
+}

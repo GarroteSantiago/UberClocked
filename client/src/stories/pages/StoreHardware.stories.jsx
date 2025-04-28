@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
-import StoreHardware from "../../screens/StoreHardware.jsx";
+import StoreHardware from "../../screens/StoreHardware/StoreHardware.jsx";
 
 export default {
     title: "Pages/StoreHardware",
