@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -34,14 +35,9 @@ app.get('/api/users/:username', async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-app.post('/api/signup', async (req, res) => {
-    const { username, password, email, confirmPassword } = req.body;
-=======
 app.post('/api/sign-up', async (req, res) => {
-    const { username, password, email } = req.body;
->>>>>>> 1f76ddd27a428b9ca7c0a9208789d5a97684fa27
-    if (!username || !password || !email) {
+    const { username, password, email, confirmPassword } = req.body;
+    if (!username || !password || !email || !confirmPassword) {
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
