@@ -44,14 +44,14 @@ app.post('/api/sign-up', async (req, res) => {
         /*if(password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
         }*/
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        //const saltRounds = 10;
+        //const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const [result] = await db.query(
             'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
             [username, password, email]
         );
-        res.status(201).json({ message: 'User created', userId: result.insertId });
+        return res.status(201).json({ message: 'User created', userId: result.insertId });
     } catch (error) {
         console.error('Error signing up user:', error);
         res.status(500).json({ message: 'Error signing up user' });
@@ -70,14 +70,13 @@ app.post('/api/login', async (req, res) => {
             return res.status(401).json({ message: 'User not found' });
         }
 
-        //const user = rows[0];
+        const user = rows[0];
         //const passwordMatch = await bcrypt.compare(password, user.password);
-
-        if (password === rows[0].password) {
-            return res.status(401).json({ message: 'Incorrect password' });
+        if (password === user.Password){
+            return res.status(200).json({ message: 'Login successful', userId: user.user_id, username: user.Username });
         }
+        return res.status(401).json({ message: 'Incorrect password' });
 
-        res.status(200).json({ message: 'Login successful', userId: rows[0].id, username: rows[0].username });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Error logging in' });

@@ -1,6 +1,5 @@
 const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
-const {promise} = require("bcrypt/promises");
 
 dotenv.config();
 
