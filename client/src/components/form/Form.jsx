@@ -6,7 +6,14 @@ import CommonButton from "../Buttons_and_others/CommonButton.jsx";
 import TextButtonForm from "./TextButtonForm.jsx";
 import MediumLogo from "../logo/MediumLogo.jsx"
 
-function Form({title, fields, commonButton, textButton}) {
+function Form({title, fields, commonButton, textButton, formData, setFormData}) {
+    const handleChange = (event) => {
+        const {id, value} = event.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [id]: value
+        }));
+    }
     return (
         <>
             <div className={styles.formContainer}>
@@ -16,7 +23,13 @@ function Form({title, fields, commonButton, textButton}) {
                     {
                         fields.map(
                             field => (
-                                <DataField fieldName={field.fieldName} fieldType={field.fieldType} id={field.id} />
+                                <DataField
+                                    key={field.id}
+                                    fieldName={field.fieldName}
+                                    fieldType={field.fieldType}
+                                    value={FormData[field.id]}
+                                    onChange={handleChange}
+                                    id={field.id}/>
                             )
                         )
                     }

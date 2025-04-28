@@ -38,6 +38,8 @@ function SignUp() {
             <Form
                 title={title}
                 fields={fields}
+                formData={formData}
+                setFormData={setFormData}
                 commonButton={commonButton}
                 textButton={textButton}
             />
