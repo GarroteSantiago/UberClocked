@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const db = require('./db/UberClockedDB');
 const app = express();
 const PORT = 5000;
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
@@ -231,4 +232,15 @@ app.delete('/api/products/:id', async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
+});
+
+// SERVIR ARCHIVOS DE REACT
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Para cualquier ruta que NO sea API, servir index.html de React
+app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) {
+        return res.status(404).json({ message: 'API route not found' });
+    }
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
