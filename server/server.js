@@ -10,15 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 const isAdmin = async (req, res, next) => {
-    console.log('Headers:', req.headers);
-    console.log('Body:', req.body);
-
     try {
         const userId = req.headers.user_id || req.body.userId;
         if (!userId) {
             return res.status(401).json({ message: 'Authentication required' });
         }
         const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
+
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -382,24 +380,6 @@ app.delete('/api/components/:id', isAdmin,async (req, res) => {
         res.status(500).json({ message: 'Error deleting component' });
     }
 });
-app.get('/api/check-admin', async (req, res) => {
-    try {
-        const userId = req.headers.userid;
-        if (!userId) {
-            return res.status(401).json({ message: 'No user ID provided' });
-        }
-        const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
-        if (rows.length === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        return res.status(200).json({ isAdmin: rows[0].UserAdmin });
-    } catch (error) {
-        console.error('Error checking admin status:', error);
-        return res.status(500).json({ message: 'Server error' });
-    }
-});
-
-
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('*', (req, res) => {
