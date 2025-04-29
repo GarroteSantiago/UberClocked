@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
+import InfoCard from "../../../components/profile/InfoCard.jsx";
+import DataField from "../../../components/form/DataField.jsx";
 
 function SeeProduct() {
     const { id } = useParams();
-
+    const [formData, setFormData] = useState({});
     const navigate = useNavigate();
     const [product, setProduct] = React.useState(null);
 
@@ -35,9 +37,30 @@ function SeeProduct() {
         return <p>Cargando producto...</p>;
     }
 
+
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const name =
+        <>
+            <DataField
+                fieldName="name"
+                fieldType="text"
+                id="name"
+                name="name"
+                value={formData["name"] || ''}
+                onChange={handleChange}
+            />
+        </>
+
     return (
         <div>
-            <h1>{product.name}</h1>
+            <InfoCard title="Name" popUpText={{}} popUpContent={{}} data={product.name}/>
             <img src={product.img} alt="Product image" />
             <p>{product.Description}</p>
             <p>{product.Price_id}</p>

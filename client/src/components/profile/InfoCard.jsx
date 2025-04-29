@@ -5,6 +5,7 @@ import PopUpTextButton from "./PopUpTextButton.jsx";
 function InfoCard({title, data, popUpContent, popUpText}) {
 
 
+
     return (
         <div className={styles.infoCard}>
             <div className={styles.infoCardData}>

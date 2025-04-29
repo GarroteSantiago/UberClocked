@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
 import styles from './PopUpTextButton.module.css';
 import PopUp from "./PopUp.jsx";
+import axios from "axios";
+import {useEffect, useState} from "react";
 
     function PopUpTextButton({ children, popUpContent, popUpText}) {
     const [showOverlay, setShowOverlay] = useState(false);
