@@ -1,6 +1,6 @@
-import Navbar from "../../components/navBar/Navbar.jsx";
+import Navbar from "../../../components/navBar/Navbar.jsx";
 import styles from "./AddProduct.module.css";
-import Form from "../../components/form/Form.jsx"
+import Form from "../../../components/form/Form.jsx"
 
 function AddProduct() {
     const fields= [
