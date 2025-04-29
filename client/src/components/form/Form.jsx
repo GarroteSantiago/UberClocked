@@ -22,8 +22,9 @@ function Form({ title, fields, commonButton, textButton, queryUrl, redirectUrl }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('Form data:', formData); // Verifica los datos
 
-        try {
+    try {
             if (title === "Login") {
                 await login(formData.email, formData.password);
                 navigate(redirectUrl);

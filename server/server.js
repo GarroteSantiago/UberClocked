@@ -11,18 +11,22 @@ app.use(express.json());
 
 const isAdmin = async (req, res, next) => {
     try {
-        const userId = req.headers.user_id || req.body.userId;
+        const userId = req.headers['user_id'] || req.body.userId;
+
         if (!userId) {
             return res.status(401).json({ message: 'Authentication required' });
         }
+
         const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
 
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
+
         if (!rows[0].UserAdmin) {
             return res.status(403).json({ message: 'Access denied: Admin privileges required' });
         }
+
         next();
     } catch (error) {
         console.error('Error checking admin status:', error);
@@ -143,7 +147,7 @@ app.patch('/api/users/:id', async (req, res) => {
 
         values.push(id);
 
-        const query = `UPDATE users SET ${fields.join(', ')} WHERE id = ?`;
+        const query = `UPDATE users SET ${fields.join(', ')} WHERE user_id = ?`;
 
         const [result] = await db.query(query, values);
 
@@ -162,7 +166,7 @@ app.delete('/api/users/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
-        const [result] = await db.query('DELETE FROM users WHERE id = ?', [id]);
+        const [result] = await db.query('DELETE FROM users WHERE user_id = ?', [id]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'User not found' });
@@ -186,10 +190,10 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-app.get('/api/products/:productName', async (req, res) => {
-    const { productName } = req.params;
+app.get('/api/products/:id', async (req, res) => {
+    const { productID } = req.params;
     try {
-        const [rows] = await db.query('SELECT * FROM products WHERE product_name = ?', [productName]);
+        const [rows] = await db.query('SELECT * FROM products WHERE product_id = ?', [productID]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'Product not found' });
         }
