@@ -7,6 +7,7 @@ import DataField from "../../components/form/DataField.jsx";
 import DeletableInfoCard from "../../components/profile/DeletableInfoCard.jsx";
 import DeleteAccountButton from "../../components/Buttons_and_others/DeleteAccountButton.jsx";
 import axios from "axios";
+import Navbar from "../../components/navBar/Navbar.jsx";
 
 function UserProfile() {
     const [user, setUser] = useState({});
@@ -76,78 +77,69 @@ function UserProfile() {
 
     return (
         <>
-            <UserData userName={user.FullName} userEmail={user.Email} />
+            <div className={styles.screen}>
+                <Navbar onScreenUrl={""} />
+                <UserData userName={user.FullName} userEmail={user.Email} />
 
-            <div className={styles.sectionsContainer}>
-                <InformationSection title="Personal Information">
-                    {isEditing ? (
-                        <>
-                            <DataField fieldType="text" fieldName="Full Name" id="FullName" value={form.FullName} onChange={handleChange} />
-                            <DataField fieldType="tel" fieldName="Cellphone" id="Cellphone" value={form.Cellphone} onChange={handleChange} />
-                            <DataField fieldType="email" fieldName="Email" id="Email" value={form.Email} onChange={handleChange} />
-                        </>
-                    ) : (
-                        <>
-                            <InfoCard title="Full name" data={user.FullName} popUpContent={fullNamePopUpContent} popUpText="Are you sure you want to change your name?" />
-                            <InfoCard title="Cellphone" data={user.Cellphone} popUpContent={cellphonePopUpContent} popUpText="Are you sure you want to change your cellphone?" />
-                            <InfoCard title="Email" data={user.Email} popUpContent={emailPopUpContent} popUpText="Are you sure you want to change your email?" />
-                        </>
-                    )}
-                </InformationSection>
+                <div className={styles.sectionsContainer}>
+                    <InformationSection title="Personal Information">
+                        {isEditing ? (
+                            <>
+                                <DataField fieldType="text" fieldName="Full Name" id="FullName" value={form.FullName} onChange={handleChange} />
+                                <DataField fieldType="tel" fieldName="Cellphone" id="Cellphone" value={form.Cellphone} onChange={handleChange} />
+                                <DataField fieldType="email" fieldName="Email" id="Email" value={form.Email} onChange={handleChange} />
+                            </>
+                        ) : (
+                            <>
+                                <InfoCard title="Full name" data={user.FullName} popUpContent={fullNamePopUpContent} popUpText="Are you sure you want to change your name?" />
+                                <InfoCard title="Cellphone" data={user.Cellphone} popUpContent={cellphonePopUpContent} popUpText="Are you sure you want to change your cellphone?" />
+                                <InfoCard title="Email" data={user.Email} popUpContent={emailPopUpContent} popUpText="Are you sure you want to change your email?" />
+                            </>
+                        )}
+                    </InformationSection>
 
-                <InformationSection title="Ubication">
-                    {isEditing ? (
-                        <>
-                            <DataField fieldType="text" fieldName="Country" id="Country" value={form.Country} onChange={handleChange} />
-                            <DataField fieldType="text" fieldName="Province" id="Province" value={form.Province} onChange={handleChange} />
-                            <DataField fieldType="text" fieldName="Location" id="Location" value={form.Location} onChange={handleChange} />
-                            <DataField fieldType="text" fieldName="Postcode" id="PostCode" value={form.PostCode} onChange={handleChange} />
-                        </>
-                    ) : (
-                        <>
-                            <InfoCard title="Country" data={user.Country} popUpContent={countryPopUpContent} popUpText="Are you sure you want to change your country?" />
-                            <InfoCard title="Province" data={user.Province} popUpContent={provincePopUpContent} popUpText="Are you sure you want to change your province?" />
-                            <InfoCard title="Location" data={user.Location} popUpContent={locationPopUpContent} popUpText="Are you sure you want to change your location?" />
-                            <InfoCard title="Postcode" data={user.PostCode} popUpContent={postcodePopUpContent} popUpText="Are you sure you want to change your postcode?" />
-                        </>
-                    )}
-                </InformationSection>
+                    <InformationSection title="Ubication">
+                        {isEditing ? (
+                            <>
+                                <DataField fieldType="text" fieldName="Country" id="Country" value={form.Country} onChange={handleChange} />
+                                <DataField fieldType="text" fieldName="Province" id="Province" value={form.Province} onChange={handleChange} />
+                                <DataField fieldType="text" fieldName="Location" id="Location" value={form.Location} onChange={handleChange} />
+                                <DataField fieldType="text" fieldName="Postcode" id="PostCode" value={form.PostCode} onChange={handleChange} />
+                            </>
+                        ) : (
+                            <>
+                                <InfoCard title="Country" data={user.Country} popUpContent={countryPopUpContent} popUpText="Are you sure you want to change your country?" />
+                                <InfoCard title="Province" data={user.Province} popUpContent={provincePopUpContent} popUpText="Are you sure you want to change your province?" />
+                                <InfoCard title="Location" data={user.Location} popUpContent={locationPopUpContent} popUpText="Are you sure you want to change your location?" />
+                                <InfoCard title="Postcode" data={user.PostCode} popUpContent={postcodePopUpContent} popUpText="Are you sure you want to change your postcode?" />
+                            </>
+                        )}
+                    </InformationSection>
 
-                <InformationSection title="Payment methods" addMethodPopUp={addPaymentMethodPopUpContent} addMethodText="Add new payment method">
-                    {paymentMethods.map((method, index) => (
-                        <DeletableInfoCard
-                            key={`payment-${index}`}
-                            title={method.Name}
-                            popUpContent={modifyPaymentMethodPopUpContent}
-                            popUpText="Are you sure you want to modify this method?"
-                        />
-                    ))}
-                </InformationSection>
+                    <InformationSection title="Payment methods" addMethodPopUp={addPaymentMethodPopUpContent} addMethodText="Add new payment method">
+                        {paymentMethods.map((method, index) => (
+                            <DeletableInfoCard
+                                key={`payment-${index}`}
+                                title={method.Name}
+                                popUpContent={modifyPaymentMethodPopUpContent}
+                                popUpText="Are you sure you want to modify this method?"
+                            />
+                        ))}
+                    </InformationSection>
 
-                <InformationSection title="Authentication methods" addMethodPopUp={addAuthenticationMethodPopUpContent} addMethodText="Add new authentication method">
-                    {authenticationMethods.map((method, index) => (
-                        <DeletableInfoCard
-                            key={`auth-${index}`}
-                            title={method.Name}
-                            popUpContent={modifyAuthenticationMethodPopUpContent}
-                            popUpText="Are you sure you want to modify this method?"
-                        />
-                    ))}
-                </InformationSection>
-
-                <div className={styles.buttonGroup}>
-                    <button onClick={() => setIsEditing(!isEditing)}>
-                        {isEditing ? 'Cancel' : 'Edit Profile'}
-                    </button>
-                    {isEditing && (
-                        <button onClick={handleSave} className={styles.saveButton}>
-                            Save Changes
-                        </button>
-                    )}
+                    <InformationSection title="Authentication methods" addMethodPopUp={addAuthenticationMethodPopUpContent} addMethodText="Add new authentication method">
+                        {authenticationMethods.map((method, index) => (
+                            <DeletableInfoCard
+                                key={`auth-${index}`}
+                                title={method.Name}
+                                popUpContent={modifyAuthenticationMethodPopUpContent}
+                                popUpText="Are you sure you want to modify this method?"
+                            />
+                        ))}
+                    </InformationSection>
                 </div>
+                <DeleteAccountButton />
             </div>
-
-            <DeleteAccountButton />
         </>
     );
 }
