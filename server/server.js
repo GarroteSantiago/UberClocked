@@ -22,6 +22,8 @@ const isAdmin = async (req, res, next) => {
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
+        console.log(rows[0]);
+
         if (!rows[0].UserAdmin) {
             return res.status(403).json({ message: 'Access denied: Admin privileges required' });
         }
@@ -272,6 +274,7 @@ app.post('/api/products', isAdmin, async (req, res) => {
         res.status(500).json({ message: 'Error creating product' });
     }
 });
+
 app.delete('/api/products/:id',isAdmin, async (req, res) => {
     const { id } = req.params;
     try {

@@ -29,12 +29,16 @@ function StoreHardware() {
         <div className={styles.screen}>
             <Navbar onScreenUrl={"/store/pc-hardware"}/>
 
-            { products &&
+            { products && products.length > 0 &&
                 <ProductCarousel>
                     {products.map((product) => (
                         <ProductCard product={product}/>
                     ))}
                 </ProductCarousel>
+            }
+            {
+                products && products.length === 0 &&
+                <p>No products</p>
             }
             <TextButton text={"Add product"} url={"/add-product"} />
             <TextButton text={"Delete product"} url={"/delete-product"} />
