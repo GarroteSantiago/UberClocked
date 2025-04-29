@@ -27,7 +27,7 @@ function Login() {
         url: "placeHolder"
     }
     const queryUrl="/api/login";
-    const redirectUrl="/sign-up";
+    const redirectUrl="/home";
 
     return (
         <div className={style.screen}>

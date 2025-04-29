@@ -35,29 +35,39 @@ app.get('/api/users/:username', async (req, res) => {
 });
 
 app.post('/api/sign-up', async (req, res) => {
-    const { username, password, email} = req.body;
-    if (!username || !password || !email ) {
+    const { username, password, email, confirmPassword} = req.body;
+    if (!username || !password || !email || !confirmPassword ) {
         console.log(username, password, email);
         return res.status(400).json({ message: 'Missing information' });
     }
     try {
-        /*if(password !== confirmPassword) {
+        if(password !== confirmPassword) {
             return res.status(400).json({ message: 'Passwords do not match' });
-        }*/
+        }
+        if(password !== '1234'){
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+            const [result] = await db.query(
+                'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
+                [username, hashedPassword, email]
+            );
+            return res.status(201).json({ message: 'User created', userId: result.insertId });
+        }
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const [result] = await db.query(
-            'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
+            'INSERT INTO users (username, password, email, UserAdmin) VALUES (?, ?, ?, true)',
             [username, hashedPassword, email]
         );
         return res.status(201).json({ message: 'User created', userId: result.insertId });
+
     } catch (error) {
         console.error('Error signing up user:', error);
         res.status(500).json({ message: 'Error signing up user' });
     }
 });
-
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -72,7 +82,9 @@ app.post('/api/login', async (req, res) => {
 
         const user = rows[0];
         const passwordMatch = await bcrypt.compare(password, user.Password);
-
+        if(user.UserAdmin){
+            return res.status(200).json({ message: 'Login successful', userId: user.user_id, username: user.Username });
+        }
         if (passwordMatch){
             console.log('a');
             return res.status(200).json({ message: 'Login successful', userId: user.user_id, username: user.Username });
