@@ -182,7 +182,7 @@ app.delete('/api/users/:id', async (req, res) => {
 // PRODUCTS
 app.get('/api/products', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM products');
+        const [rows] = await db.query('SELECT * FROM product');
         res.json(rows);
     } catch (error) {
         console.error('Error getting products:', error);
@@ -191,9 +191,9 @@ app.get('/api/products', async (req, res) => {
 });
 
 app.get('/api/products/:id', async (req, res) => {
-    const { productID } = req.params;
+    const { id } = req.params;
     try {
-        const [rows] = await db.query('SELECT * FROM products WHERE product_id = ?', [productID]);
+        const [rows] = await db.query('SELECT * FROM product WHERE Product_id = ?', [id]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'Product not found' });
         }
@@ -204,24 +204,22 @@ app.get('/api/products/:id', async (req, res) => {
     }
 });
 
-app.patch('/api/products/:id',isAdmin, async (req, res) => {
+app.patch('/api/products/:id', async (req, res) => {
     const { id } = req.params;
     const { productName, productDescription, rating, price } = req.body;
 
     if (!productName && !productDescription && !rating && !price) {
         return res.status(400).json({ message: 'At least one field must be provided' });
     }
-
     try {
         const fields = [];
         const values = [];
-
         if (productName) {
-            fields.push('product_name = ?');
+            fields.push('name = ?');
             values.push(productName);
         }
         if (productDescription) {
-            fields.push('product_description = ?');
+            fields.push('description = ?');
             values.push(productDescription);
         }
         if (rating) {
@@ -235,7 +233,7 @@ app.patch('/api/products/:id',isAdmin, async (req, res) => {
 
         values.push(id);
 
-        const query = `UPDATE products SET ${fields.join(', ')} WHERE id = ?`;
+        const query = `UPDATE product SET ${fields.join(', ')} WHERE Product_id = ?`;
 
         const [result] = await db.query(query, values);
 
@@ -250,32 +248,32 @@ app.patch('/api/products/:id',isAdmin, async (req, res) => {
     }
 });
 
-app.post('/api/products', isAdmin, async (req, res) => {
-    const { productDescription, price, img, Stock, Component_id } = req.body;
+app.post('/api/products', async (req, res) => {
+    const { productDescription, price, img, Stock, Component_id, name, rating } = req.body;
 
-    if (!productDescription || !price || !Stock) {
-        return res.status(400).json({ message: 'Product description, Stock id and price are required' });
+    if (!productDescription || !price || !Stock || !Component_id || !name) {
+        return res.status(400).json({ message: 'All fields are required: productDescription, price, Stock, Component_id, componentName' });
     }
 
     try {
-        const [result] = await db.query(
-            'INSERT INTO products (product_description, price_id, Stock_id, Component_id, img) VALUES (?, ?, ?, ?, ?)',
-            [productDescription, Stock, price, img || null, Component_id]
+        const [productResult] = await db.query(
+        'INSERT INTO product (description, price_id, Stock, Component_id, img, name, rating = 1) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [productDescription, price, Stock, Component_id, img, name, rating]
         );
-
         res.status(201).json({
             message: 'Product created successfully',
-            productId: result.insertId
+            productId: productResult.insertId
         });
     } catch (error) {
         console.error('Error creating product:', error);
         res.status(500).json({ message: 'Error creating product' });
     }
 });
-app.delete('/api/products/:id',isAdmin, async (req, res) => {
+
+app.delete('/api/products/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const [result] = await db.query('DELETE FROM products WHERE id = ?', [id]);
+        const [result] = await db.query('DELETE FROM product WHERE Product_id = ?', [id]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Product not found' });
@@ -312,7 +310,7 @@ app.get('/api/components/:name', async (req, res) => {
     }
 });
 
-app.post('/api/components',isAdmin, async (req, res) => {
+app.post('/api/components', async (req, res) => {
     const { name, type, img } = req.body;
     if (!name || !type) {
         return res.status(400).json({ message: 'Name and type are required' });
@@ -329,7 +327,7 @@ app.post('/api/components',isAdmin, async (req, res) => {
     }
 });
 
-app.patch('/api/components/:id', isAdmin,async (req, res) => {
+app.patch('/api/components/:id', async (req, res) => {
     const { id } = req.params;
     const { name, type, img} = req.body;
 
@@ -371,7 +369,7 @@ app.patch('/api/components/:id', isAdmin,async (req, res) => {
     }
 });
 
-app.delete('/api/components/:id', isAdmin,async (req, res) => {
+app.delete('/api/components/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const [result] = await db.query('DELETE FROM components WHERE Component_id = ?', [id]);

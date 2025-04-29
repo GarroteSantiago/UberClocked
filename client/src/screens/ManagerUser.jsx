@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ManagerUser() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    // Verificar si el usuario está autenticado
+    useEffect(() => {
+        const userId = localStorage.getItem('user_id');
+        if (!userId) {
+            navigate('/login'); // Redirigir a login si no hay usuario autenticado
+        }
+    }, [navigate]);
 
     const fetchUsers = async () => {
         try {
@@ -15,23 +25,21 @@ export default function ManagerUser() {
             setError('Error fetching users');
         }
     };
-    console.log('user_id en localStorage:', localStorage.getItem('user_id'));
 
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:5000/api/users/${id}`, {
-
                 headers: {
                     user_id: localStorage.getItem('user_id')
                 }
             });
-            fetchUsers();
+            // Eliminar directamente el usuario del estado para no hacer otra llamada a la API
+            setUsers(users.filter(user => user.user_id !== id));
         } catch (err) {
             console.error('Delete error:', err.response?.data || err.message);
             alert('Error deleting user: ' + (err.response?.data?.message || err.message));
         }
     };
-
 
     useEffect(() => {
         fetchUsers(); // Usa solo axios
@@ -46,7 +54,8 @@ export default function ManagerUser() {
                     <li key={user.user_id}>
                         {user.Username} ({user.Email})
                         <button onClick={() => handleDelete(user.user_id)}>Delete</button>
-                        <a href={`/edit-user/${user.user_id}`}>Edit</a>
+                        {/* Usamos Link en lugar de <a> para evitar recargar la página */}
+                        <Link to={`/edit-user/${user.user_id}`}>Edit</Link>
                     </li>
                 ))}
             </ul>
