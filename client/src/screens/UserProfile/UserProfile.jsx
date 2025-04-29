@@ -6,8 +6,24 @@ import InfoCard from "../../components/profile/InfoCard.jsx";
 import DataField from "../../components/form/DataField.jsx";
 import DeletableInfoCard from "../../components/profile/DeletableInfoCard.jsx";
 import DeleteAccountButton from "../../components/Buttons_and_others/DeleteAccountButton.jsx";
+import axios from "axios";
 
 function UserProfile({user, paymentMethods, authenticationMethods, deleteAccountFunc}) {
+
+    const getUserData = async () => {
+        const id = localStorage.getItem('user_id');
+        if (!id) {
+            console.error('No id found');
+            return;
+        }
+        try {
+            const response = await axios.get(`/api/users/${id}`);
+            console.log('User data:', response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+
     const fullNamePopUpContent =
         <>
             <DataField fieldType="text" fieldName="New Name" id="name"/>
