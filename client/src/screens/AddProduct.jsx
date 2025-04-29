@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import Form from "../components/form/Form.jsx";
+import Navbar from "../components/navBar/Navbar.jsx";
+import styles from "../screens/AddProduct/AddProduct.module.css";
 
-function AddProducto() {
+function AddProduct() {
     const [formData, setFormData] = useState({
+        name: '',
         productDescription: '',
         price: '',
         img: '',
         Stock: '',
         Component_id: '',
-        name: '',
-        rating: '' // Agregamos el campo rating
+        rating: ''
     });
 
     const [message, setMessage] = useState('');
@@ -23,11 +26,10 @@ function AddProducto() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { productDescription, price, img, Stock, Component_id, name, rating } = formData;
+        const { name, productDescription, price, img, Stock, Component_id, rating } = formData;
 
-        // Verificamos que el rating sea un valor entre 1 y 5
-        if (!productDescription || !price || !Stock || !Component_id || !name || !rating) {
-            setMessage('Todos los campos requeridos deben estar completos.');
+        if (!name || !productDescription || !price || !img || !Stock || !Component_id || !rating) {
+            setMessage('Todos los campos deben estar completos.');
             return;
         }
 
@@ -42,15 +44,7 @@ function AddProducto() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    productDescription,
-                    price,
-                    img,
-                    Stock,
-                    Component_id,
-                    name,
-                    rating // Incluimos el rating en la solicitud
-                })
+                body: JSON.stringify(formData)
             });
 
             const data = await response.json();
@@ -58,81 +52,39 @@ function AddProducto() {
             if (response.ok) {
                 setMessage(`Producto creado exitosamente. ID: ${data.productId}`);
                 setFormData({
+                    name: '',
                     productDescription: '',
                     price: '',
                     img: '',
                     Stock: '',
                     Component_id: '',
-                    name: '',
-                    rating: '' // Limpiamos el campo de rating
+                    rating: ''
                 });
             } else {
                 setMessage(data.message || 'Error al crear el producto.');
             }
         } catch (error) {
-            console.error('Error completo:', error);
             setMessage(`Error al enviar el producto: ${error.message}`);
         }
     };
 
     return (
-        <div>
-            <h2>Agregar Producto</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Nombre"
-                    value={formData.name}
-                    onChange={handleChange}
-                />
-                <input
-                    type="text"
-                    name="productDescription"
-                    placeholder="Descripción"
-                    value={formData.productDescription}
-                    onChange={handleChange}
-                />
-                <input
-                    type="number"
-                    name="price"
-                    placeholder="Precio"
-                    value={formData.price}
-                    onChange={handleChange}
-                />
-                <input
-                    type="text"
-                    name="img"
-                    placeholder="URL de imagen"
-                    value={formData.img}
-                    onChange={handleChange}
-                />
-                <input
-                    type="number"
-                    name="Stock"
-                    placeholder="Stock"
-                    value={formData.Stock}
-                    onChange={handleChange}
-                />
-                <input
-                    type="number"
-                    name="Component_id"
-                    placeholder="ID del componente"
-                    value={formData.Component_id}
-                    onChange={handleChange}
-                />
-                <input
-                    type="number"
-                    name="rating"
-                    placeholder="Rating (1-5)"
-                    value={formData.rating}
-                    onChange={handleChange}
-                />
-                <button type="submit">Agregar</button>
+        <div className={styles.screen}>
+            <Navbar onScreenUrl="/add-product" />
+            <h2 className={styles.title}>Agregar Producto</h2>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleChange} />
+                <input type="text" name="productDescription" placeholder="Descripción" value={formData.productDescription} onChange={handleChange} />
+                <input type="number" name="price" placeholder="Precio" value={formData.price} onChange={handleChange} />
+                <input type="text" name="img" placeholder="URL de imagen" value={formData.img} onChange={handleChange} />
+                <input type="number" name="Stock" placeholder="Stock" value={formData.Stock} onChange={handleChange} />
+                <input type="number" name="Component_id" placeholder="ID del componente" value={formData.Component_id} onChange={handleChange} />
+                <input type="number" name="rating" placeholder="Rating (1-5)" value={formData.rating} onChange={handleChange} />
+                <button type="submit" className={styles.button}>Agregar</button>
             </form>
-            {message && <p>{message}</p>}
+            {message && <p className={styles.message}>{message}</p>}
         </div>
     );
 }
 
-export default AddProducto;
+export default AddProduct;

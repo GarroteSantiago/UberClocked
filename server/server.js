@@ -257,7 +257,7 @@ app.post('/api/products', async (req, res) => {
 
     try {
         const [productResult] = await db.query(
-        'INSERT INTO product (description, price_id, Stock, Component_id, img, name, rating = 1) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO product (description, price_id, Stock, Component_id, img, name, rating) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [productDescription, price, Stock, Component_id, img, name, rating]
         );
         res.status(201).json({
