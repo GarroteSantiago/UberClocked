@@ -299,7 +299,7 @@ app.get('/api/components', async (req, res) => {
 app.get('/api/components/:name', async (req, res) => {
     const { name } = req.params;
     try {
-        const [rows] = await db.query('SELECT * FROM components WHERE Name = ?', [name]);
+        const [rows] = await db.query('SELECT * FROM components WHERE componentName = ?', [name]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'Component not found' });
         }

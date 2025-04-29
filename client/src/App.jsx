@@ -12,6 +12,10 @@ import EditUser from "./screens/EditUser.jsx";
 import ManagerUser from "./screens/ManagerUser.jsx";
 import ProductList from './screens/ProductList';
 import EditProduct from './screens/EditProduct'
+import AddComponent from "./screens/AddComponent.jsx";
+import EditComponent from "./screens/EditComponent.jsx";
+import DeleteComponent from "./screens/DeleteComponent.jsx";
+
 
 
 function App() {
