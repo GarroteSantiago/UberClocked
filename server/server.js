@@ -10,23 +10,23 @@ app.use(cors());
 app.use(express.json());
 
 const isAdmin = async (req, res, next) => {
-    console.log('Headers:', req.headers);
-    console.log('Body:', req.body);
-
     try {
-        const userId = req.headers.user_id || req.body.userId;
+        const userId = req.headers['user_id'] || req.body.userId;
+
         if (!userId) {
             return res.status(401).json({ message: 'Authentication required' });
         }
+
         const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
+
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
-        console.log(rows[0]);
 
         if (!rows[0].UserAdmin) {
             return res.status(403).json({ message: 'Access denied: Admin privileges required' });
         }
+
         next();
     } catch (error) {
         console.error('Error checking admin status:', error);
@@ -46,7 +46,7 @@ app.get('/api/users', async (req, res) => {
 });
 
 app.get('/api/users/:id', async (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params;
     try {
         const [rows] = await db.query('SELECT * FROM users WHERE user_id = ?', [id]);
         if (rows.length === 0) {
@@ -105,13 +105,12 @@ app.post('/api/login', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Incorrect password' });
         }
-        let a = res.status(200).json({
+        return res.status(200).json({
             message: 'Login successful',
             userId: user.user_id,
             username: user.Username,
             isAdmin: user.UserAdmin
         });
-        return a
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Error logging in' });
@@ -148,7 +147,7 @@ app.patch('/api/users/:id', async (req, res) => {
 
         values.push(id);
 
-        const query = `UPDATE users SET ${fields.join(', ')} WHERE id = ?`;
+        const query = `UPDATE users SET ${fields.join(', ')} WHERE user_id = ?`;
 
         const [result] = await db.query(query, values);
 
@@ -183,8 +182,7 @@ app.delete('/api/users/:id', async (req, res) => {
 // PRODUCTS
 app.get('/api/products', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM products');
-        console.log(rows);
+        const [rows] = await db.query('SELECT * FROM product');
         res.json(rows);
     } catch (error) {
         console.error('Error getting products:', error);
@@ -192,10 +190,10 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-app.get('/api/products/:productName', async (req, res) => {
-    const { productName } = req.params;
+app.get('/api/products/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const [rows] = await db.query('SELECT * FROM products WHERE product_name = ?', [productName]);
+        const [rows] = await db.query('SELECT * FROM product WHERE Product_id = ?', [id]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'Product not found' });
         }
@@ -206,24 +204,22 @@ app.get('/api/products/:productName', async (req, res) => {
     }
 });
 
-app.patch('/api/products/:id',isAdmin, async (req, res) => {
+app.patch('/api/products/:id', async (req, res) => {
     const { id } = req.params;
     const { productName, productDescription, rating, price } = req.body;
 
     if (!productName && !productDescription && !rating && !price) {
         return res.status(400).json({ message: 'At least one field must be provided' });
     }
-
     try {
         const fields = [];
         const values = [];
-
         if (productName) {
-            fields.push('product_name = ?');
+            fields.push('name = ?');
             values.push(productName);
         }
         if (productDescription) {
-            fields.push('product_description = ?');
+            fields.push('description = ?');
             values.push(productDescription);
         }
         if (rating) {
@@ -237,7 +233,7 @@ app.patch('/api/products/:id',isAdmin, async (req, res) => {
 
         values.push(id);
 
-        const query = `UPDATE products SET ${fields.join(', ')} WHERE id = ?`;
+        const query = `UPDATE product SET ${fields.join(', ')} WHERE Product_id = ?`;
 
         const [result] = await db.query(query, values);
 
@@ -252,22 +248,21 @@ app.patch('/api/products/:id',isAdmin, async (req, res) => {
     }
 });
 
-app.post('/api/products', isAdmin, async (req, res) => {
-    const { productDescription, price, img, Stock, Component_id } = req.body;
+app.post('/api/products', async (req, res) => {
+    const { productDescription, price, img, Stock, Component_id, name, rating } = req.body;
 
-    if (!productDescription || !price || !Stock) {
-        return res.status(400).json({ message: 'Product description, Stock id and price are required' });
+    if (!productDescription || !price || !Stock || !Component_id || !name) {
+        return res.status(400).json({ message: 'All fields are required: productDescription, price, Stock, Component_id, componentName' });
     }
 
     try {
-        const [result] = await db.query(
-            'INSERT INTO products (product_description, price_id, Stock_id, Component_id, img) VALUES (?, ?, ?, ?, ?)',
-            [productDescription, Stock, price, img || null, Component_id]
+        const [productResult] = await db.query(
+        'INSERT INTO product (description, price_id, Stock, Component_id, img, name, rating = 1) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [productDescription, price, Stock, Component_id, img, name, rating]
         );
-
         res.status(201).json({
             message: 'Product created successfully',
-            productId: result.insertId
+            productId: productResult.insertId
         });
     } catch (error) {
         console.error('Error creating product:', error);
@@ -275,10 +270,10 @@ app.post('/api/products', isAdmin, async (req, res) => {
     }
 });
 
-app.delete('/api/products/:id',isAdmin, async (req, res) => {
+app.delete('/api/products/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const [result] = await db.query('DELETE FROM products WHERE id = ?', [id]);
+        const [result] = await db.query('DELETE FROM product WHERE Product_id = ?', [id]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Product not found' });
@@ -315,7 +310,7 @@ app.get('/api/components/:name', async (req, res) => {
     }
 });
 
-app.post('/api/components',isAdmin, async (req, res) => {
+app.post('/api/components', async (req, res) => {
     const { name, type, img } = req.body;
     if (!name || !type) {
         return res.status(400).json({ message: 'Name and type are required' });
@@ -332,7 +327,7 @@ app.post('/api/components',isAdmin, async (req, res) => {
     }
 });
 
-app.patch('/api/components/:id', isAdmin,async (req, res) => {
+app.patch('/api/components/:id', async (req, res) => {
     const { id } = req.params;
     const { name, type, img} = req.body;
 
@@ -374,7 +369,7 @@ app.patch('/api/components/:id', isAdmin,async (req, res) => {
     }
 });
 
-app.delete('/api/components/:id', isAdmin,async (req, res) => {
+app.delete('/api/components/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const [result] = await db.query('DELETE FROM components WHERE Component_id = ?', [id]);
@@ -387,24 +382,6 @@ app.delete('/api/components/:id', isAdmin,async (req, res) => {
         res.status(500).json({ message: 'Error deleting component' });
     }
 });
-app.get('/api/check-admin', async (req, res) => {
-    try {
-        const userId = req.headers.userid;
-        if (!userId) {
-            return res.status(401).json({ message: 'No user ID provided' });
-        }
-        const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
-        if (rows.length === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        return res.status(200).json({ isAdmin: rows[0].UserAdmin });
-    } catch (error) {
-        console.error('Error checking admin status:', error);
-        return res.status(500).json({ message: 'Server error' });
-    }
-});
-
-
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('*', (req, res) => {

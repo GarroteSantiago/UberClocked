@@ -1,49 +1,55 @@
+import React, { useState, useEffect } from 'react';
 import styles from "./StoreHardware.module.css";
 import Navbar from "../../components/navBar/Navbar.jsx";
-import Stars from "../../components/Buttons_and_others/Stars.jsx";
 import ProductCard from "../../components/store/ProductCard.jsx";
 import ProductCarousel from "../../components/store/ProductCarousel.jsx";
 import TextButton from "../../components/Buttons_and_others/TextButton.jsx";
-import {useEffect, useState} from "react";
-import axios from "axios";
+import { useAuth } from "../../components/authentication/AuthContext.jsx";
 
-
-function StoreHardware() {
-
-    const [products, setProducts] = useState(null);
-
-    const getProducts = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/api/products/`);
-            setProducts(response.data);
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
-    };
+function StoreHardware({products}) {
+    const { user } = useAuth();
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        getProducts();
-    }, []);
+        const checkAdminStatus = async () => {
+            try {
+                if (!user || !user.userId) {
+                    return;
+                }
+
+                const res = await fetch('/api/check-admin', {
+                    headers: {
+                        'userid': user.userId
+                    }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    setIsAdmin(data.isAdmin);
+                }
+            } catch (error) {
+                console.error('Error checking admin status:', error);
+            }
+        };
+
+        checkAdminStatus();
+    }, [user]);
 
     return (
         <div className={styles.screen}>
             <Navbar onScreenUrl={"/store/pc-hardware"}/>
+            <ProductCarousel>
+                {products.map((product) => (
+                    <ProductCard key={product.id} product={product}/>
+                ))}
+            </ProductCarousel>
 
-            { products && products.length > 0 &&
-                <ProductCarousel>
-                    {products.map((product) => (
-                        <ProductCard product={product}/>
-                    ))}
-                </ProductCarousel>
-            }
-            {
-                products && products.length === 0 &&
-                <p>No products</p>
-            }
-            <TextButton text={"Add product"} url={"/add-product"} />
-            <TextButton text={"Delete product"} url={"/delete-product"} />
-            <TextButton text={"Add component"} url={"/add-component"} />
-            <TextButton text={"Delete component"} url={"/delete-component"} />
+            {isAdmin && (
+                <>
+                    <TextButton text={"Add product"} url={"/add-product"} />
+                    <TextButton text={"Add component"} url={"/add-component"} />
+                </>
+            )}
         </div>
     );
 }

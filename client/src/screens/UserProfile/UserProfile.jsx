@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import styles from './UserProfile.module.css';
 import UserData from "../../components/profile/UserData.jsx";
 import InformationSection from "../../components/profile/InformationSection.jsx";
@@ -8,21 +8,17 @@ import DeletableInfoCard from "../../components/profile/DeletableInfoCard.jsx";
 import DeleteAccountButton from "../../components/Buttons_and_others/DeleteAccountButton.jsx";
 import axios from "axios";
 
-function UserProfile() {
-    const paymentMethods = [];
-    const authenticationMethods = [];
-
-    const [userData, setUserData] = useState(null);
+function UserProfile({ user, paymentMethods, authenticationMethods, deleteAccountFunc }) {
 
     const getUserData = async () => {
-        const id = localStorage.getItem("user_id");
+        const id = localStorage.getItem('user_id');
         if (!id) {
-            console.error('No token found');
+            console.error('No id found');
             return;
         }
         try {
-            const response = await axios.get(`http://localhost:5000/api/users/${id}`);
-            setUserData(response.data);
+            const response = await axios.get(`/api/users/${id}`);
+            console.log('User data:', response.data);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -32,93 +28,62 @@ function UserProfile() {
         getUserData();
     }, []);
 
-    const fullNamePopUpContent =
-        <>
-            <DataField fieldType="text" fieldName="New name" id="name" name="" onChange="" value=""/>
-        </>
-    const emailPopUpContent =
-        <>
-            <DataField fieldType="email" fieldName="New email" id="email" name="" onChange="" value=""/>
-        </>
-    const cellphonePopUpContent =
-        <>
-            <DataField fieldType="tel" fieldName="New Cellphone" id="cellphone" name="" onChange="" value=""/>
-        </>
+    const fullNamePopUpContent = <DataField fieldType="text" fieldName="New Name" id="name" />;
+    const emailPopUpContent = <DataField fieldType="email" fieldName="New Email" id="email" />;
+    const cellphonePopUpContent = <DataField fieldType="tel" fieldName="New Cellphone" id="cellphone" />;
+    const countryPopUpContent = <DataField fieldType="text" fieldName="Country" id="country" />;
+    const provincePopUpContent = <DataField fieldType="text" fieldName="Province" id="province" />;
+    const locationPopUpContent = <DataField fieldType="text" fieldName="Location" id="location" />;
+    const postcodePopUpContent = <DataField fieldType="text" fieldName="Postcode" id="postcode" />;
 
-    const countryPopUpContent =
-        <>
-            <DataField fieldType="text" fieldName="Country" id="country" name="" onChange="" value=""/>
-        </>
-    const provincePopUpContent =
-        <>
-            <DataField fieldType="text" fieldName="Province" id="province" name="" onChange="" value=""/>
-        </>
-    const locationPopUpContent =
-        <>
-            <DataField fieldType="text" fieldName="Location" id="location" name="" onChange="" value=""/>
-        </>
-    const postcodePopUpContent =
-        <>
-            <DataField fieldType="text" fieldName="Postcode" id="postcode" name="" onChange="" value=""/>
-        </>
+    const addPaymentMethodPopUpContent = <DataField fieldType="text" fieldName="New Payment Method" id="newPayment" />;
+    const modifyPaymentMethodPopUpContent = <DataField fieldType="text" fieldName="Modify Method" id="modPayment" />;
 
-    const addPaymentMethodPopUpContent =
-        <>
-        </>
-    const modifyPaymentMethodPopUpContent =
-        <>
-        </>
-
-    const addAuthenticationMethodPopUpContent =
-        <>
-        </>
-    const modifyAuthenticationMethodPopUpContent =
-        <>
-        </>
+    const addAuthenticationMethodPopUpContent = <DataField fieldType="text" fieldName="New Auth Method" id="newAuth" />;
+    const modifyAuthenticationMethodPopUpContent = <DataField fieldType="text" fieldName="Modify Auth Method" id="modAuth" />;
 
     return (
         <>
-          {!userData ? (
-              <div>Cargando perfil...</div> // Podés reemplazarlo por un spinner si querés
-          ) : (
-              <>
-                  <UserData userName={userData.Username} userEmail={userData.Email} />
-                  <div className={styles.sectionsContainer}>
-                      <InformationSection title="Personal Information"  >
-                          <InfoCard title="Full name" data={userData.FullName} popUpContent={fullNamePopUpContent}
-                                    popUpText="Are you sure you want to change your name?"/>
-                          <InfoCard title="Cellphone" data={userData.Cellphone} popUpContent={cellphonePopUpContent}
-                                    popUpText="Are you sure you want to change your cellphone?"/>
-                          <InfoCard title="Email" data={userData.Email} popUpContent={emailPopUpContent}
-                                    popUpText="Are you sure you want to change your email?"/>
-                      </InformationSection>
-                      <InformationSection title="Ubication" >
-                          <InfoCard title="Country" data={userData.Country} popUpContent={countryPopUpContent}
-                                    popUpText="Are you sure you want to change your country?"/>
-                          <InfoCard title="Province" data={userData.Province} popUpContent={provincePopUpContent}
-                                    popUpText="Are you sure you want to change your province?"/>
-                          <InfoCard title="Location" data={userData.Location} popUpContent={locationPopUpContent}
-                                    popUpText="Are you sure you want to change your location?"/>
-                          <InfoCard title="Postcode" data={userData.Postcode} popUpContent={postcodePopUpContent}
-                                    popUpText="Are you sure you want to change your postcode?"/>
-                      </InformationSection>
-                      <InformationSection title="Payment methods" addMethodPopUp={addPaymentMethodPopUpContent} addMethodText="Add new payment method">
-                          {paymentMethods.map((method, index) => (
-                              <DeletableInfoCard key={index} title={method.Name} popUpContent={modifyPaymentMethodPopUpContent}
-                                                 popUpText="Are you sure you want to modify this method?"/>
-                          ))}
-                      </InformationSection>
-                      <InformationSection title="Authentication methods" addMethodPopUp={addAuthenticationMethodPopUpContent} addMethodText="Add new authentication method">
-                          {authenticationMethods.map((method, index) => (
-                              <DeletableInfoCard key={index} title={method.Name} popUpContent={modifyAuthenticationMethodPopUpContent}
-                                                 popUpText="Are you sure you want to add this method?"/>
-                          ))}
-                      </InformationSection>
-                  </div>
-                  <DeleteAccountButton />
-              </>
-          )}
+            <UserData userName={user.FullName} userEmail={user.Email} />
+            <div className={styles.sectionsContainer}>
+                <InformationSection title="Personal Information">
+                    <InfoCard title="Full name" data={user.FullName} popUpContent={fullNamePopUpContent} popUpText="Are you sure you want to change your name?" />
+                    <InfoCard title="Cellphone" data={user.Cellphone} popUpContent={cellphonePopUpContent} popUpText="Are you sure you want to change your cellphone?" />
+                    <InfoCard title="Email" data={user.Email} popUpContent={emailPopUpContent} popUpText="Are you sure you want to change your email?" />
+                </InformationSection>
+
+                <InformationSection title="Ubication">
+                    <InfoCard title="Country" data={user.Country} popUpContent={countryPopUpContent} popUpText="Are you sure you want to change your country?" />
+                    <InfoCard title="Province" data={user.Province} popUpContent={provincePopUpContent} popUpText="Are you sure you want to change your province?" />
+                    <InfoCard title="Location" data={user.Location} popUpContent={locationPopUpContent} popUpText="Are you sure you want to change your location?" />
+                    <InfoCard title="Postcode" data={user.PostCode} popUpContent={postcodePopUpContent} popUpText="Are you sure you want to change your postcode?" />
+                </InformationSection>
+
+                <InformationSection title="Payment methods" addMethodPopUp={addPaymentMethodPopUpContent} addMethodText="Add new payment method">
+                    {paymentMethods.map((method, index) => (
+                        <DeletableInfoCard
+                            key={`payment-${index}`}
+                            title={method.Name}
+                            popUpContent={modifyPaymentMethodPopUpContent}
+                            popUpText="Are you sure you want to modify this method?"
+                        />
+                    ))}
+                </InformationSection>
+
+                <InformationSection title="Authentication methods" addMethodPopUp={addAuthenticationMethodPopUpContent} addMethodText="Add new authentication method">
+                    {authenticationMethods.map((method, index) => (
+                        <DeletableInfoCard
+                            key={`auth-${index}`}
+                            title={method.Name}
+                            popUpContent={modifyAuthenticationMethodPopUpContent}
+                            popUpText="Are you sure you want to modify this method?"
+                        />
+                    ))}
+                </InformationSection>
+            </div>
+            <DeleteAccountButton onclick={deleteAccountFunc} />
         </>
     );
 }
+
 export default UserProfile;
