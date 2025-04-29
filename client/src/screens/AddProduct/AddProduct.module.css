@@ -1,11 +1,11 @@
 .screen {
     width: 100%;
     min-height: 100vh;
-    background-color: #f5f7fa;
+    background-color: #0A060D;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px; /* espacio para que no tape el navbar */
+    padding-top: 100px;
     box-sizing: border-box;
 }
 
@@ -21,7 +21,7 @@
     flex-direction: column;
     width: 90%;
     max-width: 500px;
-    background-color: #fff;
+    background-color: rgba(10, 6, 13, 0.42);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

@@ -4,7 +4,7 @@ import Home from "./screens/Home/Home.jsx";
 import SignUp from "./screens/SignUp/SignUp.jsx";
 import Login from "./screens/Login/Login.jsx";
 import {Route, Routes} from "react-router-dom";
-import AddProduct from "./screens/AddProduct.jsx";
+import AddProduct from "./screens/AddProduct/AddProduct.jsx";
 import StoreHardware from "./screens/StoreHardware/StoreHardware.jsx";
 import UserProfile from "./screens/UserProfile/UserProfile.jsx";
 import AddUser from "./screens/AddUser.jsx";

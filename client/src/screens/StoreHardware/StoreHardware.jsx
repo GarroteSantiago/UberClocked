@@ -4,36 +4,23 @@ import Navbar from "../../components/navBar/Navbar.jsx";
 import ProductCard from "../../components/store/ProductCard.jsx";
 import ProductCarousel from "../../components/store/ProductCarousel.jsx";
 import TextButton from "../../components/Buttons_and_others/TextButton.jsx";
-import { useAuth } from "../../components/authentication/AuthContext.jsx";
 
-function StoreHardware({products}) {
-    const { user } = useAuth();
-    const [isAdmin, setIsAdmin] = useState(false);
+function StoreHardware() {
+    const [products, setProducts] = useState([]);
+
+    const getProducts = async () => {
+        try {
+            const response = await fetch("/api/products");
+            const data = await response.json();
+            setProducts(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        const checkAdminStatus = async () => {
-            try {
-                if (!user || !user.userId) {
-                    return;
-                }
-
-                const res = await fetch('/api/check-admin', {
-                    headers: {
-                        'userid': user.userId
-                    }
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    setIsAdmin(data.isAdmin);
-                }
-            } catch (error) {
-                console.error('Error checking admin status:', error);
-            }
-        };
-
-        checkAdminStatus();
-    }, [user]);
+        getProducts();
+    });
 
     return (
         <div className={styles.screen}>
@@ -44,13 +31,14 @@ function StoreHardware({products}) {
                 ))}
             </ProductCarousel>
 
-            {isAdmin && (
+            {(
                 <>
                     <TextButton text={"Add product"} url={"/add-product"} />
                     <TextButton text={"Add component"} url={"/add-component"} />
                 </>
             )}
         </div>
+
     );
 }
 

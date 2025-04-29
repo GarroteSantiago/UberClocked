@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Form from "../components/form/Form.jsx";
-import Navbar from "../components/navBar/Navbar.jsx";
-import styles from "../screens/AddProduct/AddProduct.module.css";
+import Navbar from "../../components/navBar/Navbar.jsx";
+import styles from "./AddProduct.module.css";
+import Form from "../../components/form/Form.jsx"
 
 function AddProduct() {
     const [formData, setFormData] = useState({
@@ -68,20 +68,60 @@ function AddProduct() {
         }
     };
 
+    const fields= [
+        {
+            fieldName: "Name",
+            fieldType: "text",
+            id: "name",
+            name: "name",
+        },
+        {
+            fieldName: "Description",
+            fieldType: "text",
+            id: "productDescription",
+            name: "productDescription"
+        },
+        {
+            fieldName: "Price",
+            fieldType: "number",
+            id: "price",
+            name: "price"
+        },
+        {
+            fieldName: "img",
+            fieldType: "text",
+            id: "img",
+            name: "img"
+        },
+        {
+            fieldName: "Stock",
+            fieldType: "checkbox",
+            id: "Stock",
+            name: "Stock"
+        },
+        {
+            fieldName: "Stock",
+            fieldType: "number",
+            id: "Stock",
+            name: "Stock"
+        },
+        {
+            fieldName: "Component id",
+            fieldType: "number",
+            id: "Component_id",
+            name: "Component_id"
+        },
+        {
+            fieldName: "Rating (1-5)",
+            fieldType: "number",
+            id: "rating",
+            name: "rating"
+        },
+    ]
     return (
         <div className={styles.screen}>
             <Navbar onScreenUrl="/add-product" />
-            <h2 className={styles.title}>Agregar Producto</h2>
-            <form onSubmit={handleSubmit} className={styles.form}>
-                <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleChange} />
-                <input type="text" name="productDescription" placeholder="Descripción" value={formData.productDescription} onChange={handleChange} />
-                <input type="number" name="price" placeholder="Precio" value={formData.price} onChange={handleChange} />
-                <input type="text" name="img" placeholder="URL de imagen" value={formData.img} onChange={handleChange} />
-                <input type="number" name="Stock" placeholder="Stock" value={formData.Stock} onChange={handleChange} />
-                <input type="number" name="Component_id" placeholder="ID del componente" value={formData.Component_id} onChange={handleChange} />
-                <input type="number" name="rating" placeholder="Rating (1-5)" value={formData.rating} onChange={handleChange} />
-                <button type="submit" className={styles.button}>Agregar</button>
-            </form>
+            <Form title="Add Product" fields ={fields} commonButton={{text: "Add product"}} textButton={{}} queryUrl="/api/products" redirectUrl="/home" />
             {message && <p className={styles.message}>{message}</p>}
         </div>
     );
