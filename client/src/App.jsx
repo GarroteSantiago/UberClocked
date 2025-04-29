@@ -4,13 +4,14 @@ import Home from "./screens/Home/Home.jsx";
 import SignUp from "./screens/SignUp/SignUp.jsx";
 import Login from "./screens/Login/Login.jsx";
 import {Route, Routes} from "react-router-dom";
-import AddProduct from "./screens/AddProduct/AddProduct.jsx";
+import AddProduct from "./screens/Product/AddProduct/AddProduct.jsx";
 import StoreHardware from "./screens/StoreHardware/StoreHardware.jsx";
 import UserProfile from "./screens/UserProfile/UserProfile.jsx";
 import EditUser from "./screens/EditUser.jsx";
 import ManagerUser from "./screens/ManagerUser.jsx";
 import EditProduct from './screens/EditProduct'
 import AddComponent from "./screens/AddComponent/AddComponent.jsx";
+import SeeProduct from "./screens/Product/SeeProduct/SeeProduct.jsx";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/edit-product/:id" element={<EditProduct />} />
             <Route path="/add-component" element={<AddComponent />} />
+            <Route path="/product/:id" element={<SeeProduct />} />
         </Routes>
     </>
   )
