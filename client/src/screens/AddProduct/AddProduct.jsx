@@ -7,14 +7,14 @@ function AddProduct() {
     text: "Add Product",
 }
     const redirectUrl = "/add-product";
-    const queryUrl = "/add-product";
+    const queryUrl = "/api/products";
 
     const fields = [
         {
-            id: "name",
+            id: "productDescription",
             fieldName: "Product name",
             fieldType: "text",
-            name: "name",
+            name: "productDescription",
         },
         {
             id: "price",
@@ -23,10 +23,10 @@ function AddProduct() {
             name: "price"
         },
         {
-            id: "componentType",
-            fieldName: "Component Type",
-            fieldType: "text",
-            name: "componentType",
+            id: "Component_id",
+            fieldName: "Component ID",
+            fieldType: "number",
+            name: "Component_id",
         },
         {
             id: "description",
@@ -35,12 +35,19 @@ function AddProduct() {
             name: "description",
         },
         {
-            id: "availability",
-            fieldName: "stock",
-            fieldType: "checkbox",
-            name: "stock"
+            id: "Stock",
+            fieldName: "In Stock",
+            fieldType: "number",
+            name: "Stock"
         },
-    ]
+        {
+            id: "img",
+            fieldName: "Image URL",
+            fieldType: "text",
+            name: "img",
+        },
+    ];
+
 
     return (
         <div className={styles.screen}>

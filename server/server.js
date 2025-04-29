@@ -9,10 +9,12 @@ const path = require('path');
 app.use(cors());
 app.use(express.json());
 
-
 const isAdmin = async (req, res, next) => {
+    console.log('Headers:', req.headers);
+    console.log('Body:', req.body);
+
     try {
-        const userId = req.headers.userid || req.body.userId;
+        const userId = req.headers.user_id || req.body.userId;
         if (!userId) {
             return res.status(401).json({ message: 'Authentication required' });
         }
