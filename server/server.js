@@ -9,6 +9,27 @@ const path = require('path');
 app.use(cors());
 app.use(express.json());
 
+
+const isAdmin = async (req, res, next) => {
+    try {
+        const userId = req.headers.userid || req.body.userId;
+        if (!userId) {
+            return res.status(401).json({ message: 'Authentication required' });
+        }
+        const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (!rows[0].UserAdmin) {
+            return res.status(403).json({ message: 'Access denied: Admin privileges required' });
+        }
+        next();
+    } catch (error) {
+        console.error('Error checking admin status:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 // USERS
 app.get('/api/users', async (req, res) => {
     try {
@@ -183,7 +204,7 @@ app.get('/api/products/:productName', async (req, res) => {
     }
 });
 
-app.patch('/api/products/:id', async (req, res) => {
+app.patch('/api/products/:id',isAdmin, async (req, res) => {
     const { id } = req.params;
     const { productName, productDescription, rating, price } = req.body;
 
@@ -229,9 +250,30 @@ app.patch('/api/products/:id', async (req, res) => {
     }
 });
 
-app.delete('/api/products/:id', async (req, res) => {
-    const { id } = req.params;
+app.post('/api/products', isAdmin, async (req, res) => {
+    const { productDescription, price, img, Stock, Component_id } = req.body;
 
+    if (!productDescription || !price || !Stock) {
+        return res.status(400).json({ message: 'Product description, Stock id and price are required' });
+    }
+
+    try {
+        const [result] = await db.query(
+            'INSERT INTO products (product_description, price_id, Stock_id, Component_id, img) VALUES (?, ?, ?, ?, ?)',
+            [productDescription, Stock, price, img || null, Component_id]
+        );
+
+        res.status(201).json({
+            message: 'Product created successfully',
+            productId: result.insertId
+        });
+    } catch (error) {
+        console.error('Error creating product:', error);
+        res.status(500).json({ message: 'Error creating product' });
+    }
+});
+app.delete('/api/products/:id',isAdmin, async (req, res) => {
+    const { id } = req.params;
     try {
         const [result] = await db.query('DELETE FROM products WHERE id = ?', [id]);
 
@@ -270,7 +312,7 @@ app.get('/api/components/:name', async (req, res) => {
     }
 });
 
-app.post('/api/components', async (req, res) => {
+app.post('/api/components',isAdmin, async (req, res) => {
     const { name, type, img } = req.body;
     if (!name || !type) {
         return res.status(400).json({ message: 'Name and type are required' });
@@ -287,7 +329,7 @@ app.post('/api/components', async (req, res) => {
     }
 });
 
-app.patch('/api/components/:id', async (req, res) => {
+app.patch('/api/components/:id', isAdmin,async (req, res) => {
     const { id } = req.params;
     const { name, type, img} = req.body;
 
@@ -329,7 +371,7 @@ app.patch('/api/components/:id', async (req, res) => {
     }
 });
 
-app.delete('/api/components/:id', async (req, res) => {
+app.delete('/api/components/:id', isAdmin,async (req, res) => {
     const { id } = req.params;
     try {
         const [result] = await db.query('DELETE FROM components WHERE Component_id = ?', [id]);
