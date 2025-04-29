@@ -56,32 +56,29 @@ app.get('/api/users/:username', async (req, res) => {
 });
 
 app.post('/api/sign-up', async (req, res) => {
-    const { username, password, email, confirmPassword} = req.body;
-    if (!username || !password || !email || !confirmPassword ) {
-        console.log(username, password, email);
+    const { username, password, email, confirmPassword, adminCode } = req.body;
+
+    if (!username || !password || !email || !confirmPassword) {
         return res.status(400).json({ message: 'Missing information' });
     }
-    try {
-        if(password !== confirmPassword) {
-            return res.status(400).json({ message: 'Passwords do not match' });
-        }
-        if(password !== '1234'){
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
+    if (password !== confirmPassword) {
+        return res.status(400).json({ message: 'Passwords do not match' });
+    }
 
-            const [result] = await db.query(
-                'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
-                [username, hashedPassword, email]
-            );
-            return res.status(201).json({ message: 'User created', userId: result.insertId });
-        }
+    try {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+        let isAdmin = false;
+        if (adminCode && adminCode === "1234") {
+            isAdmin = true;
+        }
+
         const [result] = await db.query(
-            'INSERT INTO users (username, password, email, UserAdmin) VALUES (?, ?, ?, true)',
-            [username, hashedPassword, email]
+            'INSERT INTO users (username, password, email, UserAdmin) VALUES (?, ?, ?, ?)',
+            [username, hashedPassword, email, isAdmin]
         );
+
         return res.status(201).json({ message: 'User created', userId: result.insertId });
 
     } catch (error) {
@@ -96,27 +93,26 @@ app.post('/api/login', async (req, res) => {
     }
     try {
         const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-
         if (rows.length === 0) {
             return res.status(401).json({ message: 'User not found' });
         }
-
         const user = rows[0];
         const passwordMatch = await bcrypt.compare(password, user.Password);
-        if(user.UserAdmin){
-            return res.status(200).json({ message: 'Login successful', userId: user.user_id, username: user.Username });
+        if (!passwordMatch) {
+            return res.status(401).json({ message: 'Incorrect password' });
         }
-        if (passwordMatch){
-            console.log('a');
-            return res.status(200).json({ message: 'Login successful', userId: user.user_id, username: user.Username });
-        }
-        return res.status(401).json({ message: 'Incorrect password' });
-
+        return res.status(200).json({
+            message: 'Login successful',
+            userId: user.user_id,
+            username: user.Username,
+            isAdmin: user.UserAdmin
+        });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Error logging in' });
     }
 });
+
 
 app.patch('/api/users/:id', async (req, res) => {
     const { id } = req.params;
@@ -384,6 +380,23 @@ app.delete('/api/components/:id', isAdmin,async (req, res) => {
         res.status(500).json({ message: 'Error deleting component' });
     }
 });
+app.get('/api/check-admin', async (req, res) => {
+    try {
+        const userId = req.headers.userid;
+        if (!userId) {
+            return res.status(401).json({ message: 'No user ID provided' });
+        }
+        const [rows] = await db.query('SELECT UserAdmin FROM users WHERE user_id = ?', [userId]);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        return res.status(200).json({ isAdmin: rows[0].UserAdmin });
+    } catch (error) {
+        console.error('Error checking admin status:', error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 

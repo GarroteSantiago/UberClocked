@@ -29,11 +29,16 @@ function SignUp() {
             fieldType: "password",
             id: "re-password",
             name: "confirmPassword",
+        },
+        {
+            fieldName: "Admin Code (optional)",
+            fieldType: "text",
+            id: "adminCode",
+            name: "adminCode",
         }
     ]
     const commonButton={
         text: "SignUp",
-        action: () => alert('Button clicked')
     }
 
     const textButton={}
