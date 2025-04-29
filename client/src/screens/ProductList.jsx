@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
+import ProductCarousel from '../components/store/ProductCarousel';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Fetch the products when the component mounts
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -21,7 +21,6 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
-    // Handle the delete action
     const handleDelete = async (productId) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
@@ -42,15 +41,15 @@ const ProductList = () => {
             <h2>Product Management</h2>
             {error && <p>{error}</p>}
             <button onClick={() => navigate('/add-product')}>Add Product</button>
-            <div>
+            <ProductCarousel>
                 {products.map((product) => (
                     <ProductCard
                         key={product.Product_id}
                         product={product}
-                        onDelete={() => handleDelete(product.Product_id)} // Passing product_id to handleDelete
+                        onDelete={handleDelete}
                     />
                 ))}
-            </div>
+            </ProductCarousel>
         </div>
     );
 };
