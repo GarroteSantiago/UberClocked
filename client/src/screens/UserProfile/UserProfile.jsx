@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './UserProfile.module.css';
 import UserData from "../../components/profile/UserData.jsx";
 import InformationSection from "../../components/profile/InformationSection.jsx";
@@ -9,21 +9,32 @@ import DeleteAccountButton from "../../components/Buttons_and_others/DeleteAccou
 import axios from "axios";
 
 function UserProfile() {
-    const paymentMethods = []
-    const authenticationMethods = []
-
     const [user, setUser] = useState({});
+    const [form, setForm] = useState({});
+    const [isEditing, setIsEditing] = useState(false);
+
+    const paymentMethods = [];
+    const authenticationMethods = [];
+
+    const userId = localStorage.getItem('user_id');
 
     const getUserData = async () => {
-        const id = localStorage.getItem('user_id');
-        if (!id) {
+        if (!userId) {
             console.error('No id found');
             return;
         }
         try {
-            const response = await axios.get(`http://localhost:5000/api/users/${id}`);
+            const response = await axios.get(`http://localhost:5000/api/users/${userId}`);
             setUser(response.data);
-            console.log('User data:', response.data);
+            setForm({
+                FullName: response.data.FullName || '',
+                Email: response.data.Email || '',
+                Cellphone: response.data.Cellphone || '',
+                Country: response.data.Country || '',
+                Province: response.data.Province || '',
+                Location: response.data.Location || '',
+                PostCode: response.data.PostCode || ''
+            });
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -32,6 +43,22 @@ function UserProfile() {
     useEffect(() => {
         getUserData();
     }, []);
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSave = async () => {
+        try {
+            await axios.patch(`http://localhost:5000/api/users/${userId}`, form);
+            alert('Profile updated successfully');
+            setIsEditing(false);
+            getUserData();
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Error updating profile');
+        }
+    };
 
     const fullNamePopUpContent = <DataField fieldType="text" fieldName="New Name" id="name" />;
     const emailPopUpContent = <DataField fieldType="email" fieldName="New Email" id="email" />;
@@ -50,18 +77,40 @@ function UserProfile() {
     return (
         <>
             <UserData userName={user.FullName} userEmail={user.Email} />
+
             <div className={styles.sectionsContainer}>
                 <InformationSection title="Personal Information">
-                    <InfoCard title="Full name" data={user.FullName} popUpContent={fullNamePopUpContent} popUpText="Are you sure you want to change your name?" />
-                    <InfoCard title="Cellphone" data={user.Cellphone} popUpContent={cellphonePopUpContent} popUpText="Are you sure you want to change your cellphone?" />
-                    <InfoCard title="Email" data={user.Email} popUpContent={emailPopUpContent} popUpText="Are you sure you want to change your email?" />
+                    {isEditing ? (
+                        <>
+                            <DataField fieldType="text" fieldName="Full Name" id="FullName" value={form.FullName} onChange={handleChange} />
+                            <DataField fieldType="tel" fieldName="Cellphone" id="Cellphone" value={form.Cellphone} onChange={handleChange} />
+                            <DataField fieldType="email" fieldName="Email" id="Email" value={form.Email} onChange={handleChange} />
+                        </>
+                    ) : (
+                        <>
+                            <InfoCard title="Full name" data={user.FullName} popUpContent={fullNamePopUpContent} popUpText="Are you sure you want to change your name?" />
+                            <InfoCard title="Cellphone" data={user.Cellphone} popUpContent={cellphonePopUpContent} popUpText="Are you sure you want to change your cellphone?" />
+                            <InfoCard title="Email" data={user.Email} popUpContent={emailPopUpContent} popUpText="Are you sure you want to change your email?" />
+                        </>
+                    )}
                 </InformationSection>
 
                 <InformationSection title="Ubication">
-                    <InfoCard title="Country" data={user.Country} popUpContent={countryPopUpContent} popUpText="Are you sure you want to change your country?" />
-                    <InfoCard title="Province" data={user.Province} popUpContent={provincePopUpContent} popUpText="Are you sure you want to change your province?" />
-                    <InfoCard title="Location" data={user.Location} popUpContent={locationPopUpContent} popUpText="Are you sure you want to change your location?" />
-                    <InfoCard title="Postcode" data={user.PostCode} popUpContent={postcodePopUpContent} popUpText="Are you sure you want to change your postcode?" />
+                    {isEditing ? (
+                        <>
+                            <DataField fieldType="text" fieldName="Country" id="Country" value={form.Country} onChange={handleChange} />
+                            <DataField fieldType="text" fieldName="Province" id="Province" value={form.Province} onChange={handleChange} />
+                            <DataField fieldType="text" fieldName="Location" id="Location" value={form.Location} onChange={handleChange} />
+                            <DataField fieldType="text" fieldName="Postcode" id="PostCode" value={form.PostCode} onChange={handleChange} />
+                        </>
+                    ) : (
+                        <>
+                            <InfoCard title="Country" data={user.Country} popUpContent={countryPopUpContent} popUpText="Are you sure you want to change your country?" />
+                            <InfoCard title="Province" data={user.Province} popUpContent={provincePopUpContent} popUpText="Are you sure you want to change your province?" />
+                            <InfoCard title="Location" data={user.Location} popUpContent={locationPopUpContent} popUpText="Are you sure you want to change your location?" />
+                            <InfoCard title="Postcode" data={user.PostCode} popUpContent={postcodePopUpContent} popUpText="Are you sure you want to change your postcode?" />
+                        </>
+                    )}
                 </InformationSection>
 
                 <InformationSection title="Payment methods" addMethodPopUp={addPaymentMethodPopUpContent} addMethodText="Add new payment method">
@@ -85,8 +134,20 @@ function UserProfile() {
                         />
                     ))}
                 </InformationSection>
+
+                <div className={styles.buttonGroup}>
+                    <button onClick={() => setIsEditing(!isEditing)}>
+                        {isEditing ? 'Cancel' : 'Edit Profile'}
+                    </button>
+                    {isEditing && (
+                        <button onClick={handleSave} className={styles.saveButton}>
+                            Save Changes
+                        </button>
+                    )}
+                </div>
             </div>
-            <DeleteAccountButton  />
+
+            <DeleteAccountButton />
         </>
     );
 }

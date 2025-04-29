@@ -8,6 +8,7 @@ import DropDownMenuTextButton from "../dropDownMenu/DropDownMenuTextButton.jsx";
 import ImageButton from "../Buttons_and_others/ImageButton.jsx";
 import TextButton from "../Buttons_and_others/TextButton.jsx";
 import {useAuth} from "../authentication/AuthContext.jsx";
+import LogoutButton from '../../components/Buttons_and_others/LogoutButton';
 
 function Navbar({onScreenUrl}) {
     const { isAuthenticated } = useAuth();
@@ -19,6 +20,7 @@ function Navbar({onScreenUrl}) {
             <div className={styles.imageOptions}>
                 <ImageButton image="/UserDefaultImage.svg" alt="User Image" url="/profile"/>
                 <ImageButton image="/ShoppingCart.svg" alt="Shopping cart" url="/shopping-cart"/>
+                <LogoutButton />
             </div>
     } else {
         options =
