@@ -103,12 +103,13 @@ app.post('/api/login', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Incorrect password' });
         }
-        return res.status(200).json({
+        let a = res.status(200).json({
             message: 'Login successful',
             userId: user.user_id,
             username: user.Username,
             isAdmin: user.UserAdmin
         });
+        return a
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Error logging in' });
