@@ -191,7 +191,7 @@ app.get('/api/products', async (req, res) => {
 });
 
 app.get('/api/products/:id', async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     try {
         const [rows] = await db.query('SELECT * FROM product WHERE Product_id = ?', [id]);
         if (rows.length === 0) {
