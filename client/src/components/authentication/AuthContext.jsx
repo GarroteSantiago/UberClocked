@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const AuthContext = createContext(undefined);
 
 export function AuthProvider({ children }) {
-    const [token, setToken] = useState(null);
+    const [id, setId] = useState(null);
     const [isTokenValid, setIsTokenValid] = useState(false);
 
     const login = async (email, password) => {
@@ -18,13 +18,13 @@ export function AuthProvider({ children }) {
         }
 
         const data = await response.json();
-        setToken(data.user_id);
-        localStorage.setItem('user_id', data.user_id);
+        setId(data.userId);
+        localStorage.setItem('user_id', data.userId);
         setIsTokenValid(true);
     };
 
     const logout = () => {
-        setToken(null);
+        setId(null);
         localStorage.removeItem('user_id');
         setIsTokenValid(false);
     };
@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
 
             const data = await response.json();
             if (data.valid) {
-                setToken(storedToken);
+                setId(storedToken);
                 setIsTokenValid(true);
                 return true;
             } else {
@@ -70,10 +70,10 @@ export function AuthProvider({ children }) {
         initAuth();
     }, []);
 
-    const isAuthenticated = token !== null && isTokenValid;
+    const isAuthenticated = id !== null && isTokenValid;
 
     return (
-        <AuthContext.Provider value={{ token, login, logout, isAuthenticated }}>
+        <AuthContext.Provider value={{ id, login, logout, isAuthenticated }}>
             {children}
         </AuthContext.Provider>
     );

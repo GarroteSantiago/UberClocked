@@ -44,12 +44,13 @@ app.get('/api/users', async (req, res) => {
 });
 
 app.get('/api/users/:id', async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     try {
         const [rows] = await db.query('SELECT * FROM users WHERE user_id = ?', [id]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
+        console.log(rows[0])
         return res.json(rows[0]);
     } catch (error) {
         console.error('Error getting user:', error);
