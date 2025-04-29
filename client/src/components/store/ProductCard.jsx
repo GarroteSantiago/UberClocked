@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import Stars from "../Buttons_and_others/Stars.jsx";
 
-function ProductCard({key, product }) {
+function ProductCard({product }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/product/${key}`);
+        navigate(`/product/${product.Product_id}`);
     };
 
     return (

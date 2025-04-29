@@ -1,11 +1,22 @@
 import React, {useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 
 function SeeProduct() {
     const { id } = useParams();
 
+    const navigate = useNavigate();
     const [product, setProduct] = React.useState(null);
+
+    const deleteProduct = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/products/${id}`);
+            console.log(response);
+            navigate("/home")
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const getProduct = async () => {
         try {
@@ -30,6 +41,7 @@ function SeeProduct() {
             <img src={product.img} alt="Product image" />
             <p>{product.Description}</p>
             <p>{product.Price_id}</p>
+            <button onClick={() => deleteProduct(id)}> Delete product</button>
         </div>
     );
 }

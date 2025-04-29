@@ -27,7 +27,7 @@ function StoreHardware() {
             <Navbar onScreenUrl={"/store/pc-hardware"}/>
             <ProductCarousel>
                 {products.map((product) => (
-                    <ProductCard key={product.id} product={product}/>
+                    <ProductCard product={product}/>
                 ))}
             </ProductCarousel>
 
