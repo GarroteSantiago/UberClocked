@@ -16,7 +16,9 @@ function StoreHardware({products}) {
                 ))}
             </ProductCarousel>
             <TextButton text={"Add product"} url={"/add-product"} />
+            <TextButton text={"Delete product"} url={"/delete-product"} />
             <TextButton text={"Add component"} url={"/add-component"} />
+            <TextButton text={"Delete component"} url={"/delete-component"} />
         </div>
     );
 }

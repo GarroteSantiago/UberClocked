@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './DeleteAccountButton.module.css';
+import axios from "axios";
 
 function DeleteAccountButton() {
     const handleDeleteAccount = async () => {
@@ -12,7 +13,6 @@ function DeleteAccountButton() {
         try {
             const response = await axios.delete(`http://localhost:5000/api/users/${userId}`);
             console.log('Deleted:', response.data);
-            // Opcional: cerrar sesión, redirigir, etc.
         } catch (error) {
             console.error('Error deleting user:', error);
         }
