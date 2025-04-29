@@ -18,14 +18,14 @@ export function AuthProvider({ children }) {
         }
 
         const data = await response.json();
-        setToken(data.token);
-        localStorage.setItem('authToken', data.token);
+        setToken(data.user_id);
+        localStorage.setItem('user_id', data.user_id);
         setIsTokenValid(true);
     };
 
     const logout = () => {
         setToken(null);
-        localStorage.removeItem('authToken');
+        localStorage.removeItem('user_id');
         setIsTokenValid(false);
     };
 

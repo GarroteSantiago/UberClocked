@@ -43,10 +43,10 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
-app.get('/api/users/:username', async (req, res) => {
-    const { username } = req.params;
+app.get('/api/users/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+        const [rows] = await db.query('SELECT * FROM users WHERE user_id = ?', [id]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
