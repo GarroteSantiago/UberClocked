@@ -50,7 +50,6 @@ app.get('/api/users/:id', async (req, res) => {
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
-        console.log(rows[0])
         return res.json(rows[0]);
     } catch (error) {
         console.error('Error getting user:', error);
@@ -166,7 +165,7 @@ app.delete('/api/users/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
-        const [result] = await db.query('DELETE FROM users WHERE id = ?', [id]);
+        const [result] = await db.query('DELETE FROM users WHERE user_id = ?', [id]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'User not found' });
@@ -183,6 +182,7 @@ app.delete('/api/users/:id', async (req, res) => {
 app.get('/api/products', async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM products');
+        console.log(rows);
         res.json(rows);
     } catch (error) {
         console.error('Error getting products:', error);

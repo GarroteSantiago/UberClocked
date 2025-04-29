@@ -16,8 +16,7 @@ function App() {
             <Route path="/home" element={<Home />}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/sign-up" element={<SignUp/>} />
-            <Route path="/store/pc-hardware" element={<StoreHardware products={[]} />} />
-            <Route path="/store/server-hardware" element={<StoreHardware products={[]} />} />
+            <Route path="/store/pc-hardware" element={<StoreHardware />} />
             <Route path="/add-product" element={<AddProduct />}/>
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/shopping-cart" element={<></>} />
