@@ -66,12 +66,13 @@ function Form({ title, fields, commonButton, textButton, queryUrl, redirectUrl }
                             />
                         ))
                     }
-                    <CommonButton
-                        text={commonButton.text}
-                        action={handleSubmit}
-                    />
                 </form>
+                <CommonButton
+                    text={commonButton.text}
+                    action={handleSubmit}
+                />
                 <TextButtonForm text={textButton.text} url={textButton.url} />
+
             </div>
         </>
     );

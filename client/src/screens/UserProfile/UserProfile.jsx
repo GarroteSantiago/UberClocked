@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './UserProfile.module.css';
 import UserData from "../../components/profile/UserData.jsx";
 import InformationSection from "../../components/profile/InformationSection.jsx";
@@ -8,7 +8,11 @@ import DeletableInfoCard from "../../components/profile/DeletableInfoCard.jsx";
 import DeleteAccountButton from "../../components/Buttons_and_others/DeleteAccountButton.jsx";
 import axios from "axios";
 
-function UserProfile({ user, paymentMethods, authenticationMethods, deleteAccountFunc }) {
+function UserProfile() {
+    const paymentMethods = []
+    const authenticationMethods = []
+
+    const [user, setUser] = useState({});
 
     const getUserData = async () => {
         const id = localStorage.getItem('user_id');
@@ -17,7 +21,8 @@ function UserProfile({ user, paymentMethods, authenticationMethods, deleteAccoun
             return;
         }
         try {
-            const response = await axios.get(`/api/users/${id}`);
+            const response = await axios.get(`http://localhost:5000/api/users/${id}`);
+            setUser(response.data);
             console.log('User data:', response.data);
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -81,7 +86,7 @@ function UserProfile({ user, paymentMethods, authenticationMethods, deleteAccoun
                     ))}
                 </InformationSection>
             </div>
-            <DeleteAccountButton onclick={deleteAccountFunc} />
+            <DeleteAccountButton  />
         </>
     );
 }
