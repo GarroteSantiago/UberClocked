@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import PopUp from '../components/profile/PopUp';
 
 const EditProduct = () => {
     const { id } = useParams();
@@ -11,6 +12,7 @@ const EditProduct = () => {
         price: ''
     });
     const [error, setError] = useState('');
+    const [showPopUp, setShowPopUp] = useState(false); // Para controlar el popup
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -51,6 +53,15 @@ const EditProduct = () => {
         }
     };
 
+    const handleCancel = () => {
+        setShowPopUp(false); // Cerrar el PopUp al cancelar
+    };
+
+    const handleConfirm = () => {
+        setShowPopUp(false); // Cerrar el PopUp al confirmar
+        handleSubmit(); // Confirmar y enviar el formulario
+    };
+
     return (
         <div>
             <h2>Edit Product</h2>
@@ -83,8 +94,18 @@ const EditProduct = () => {
                     value={product.price}
                     onChange={handleChange}
                 />
-                <button type="submit">Save Changes</button>
+                <button type="button" onClick={() => setShowPopUp(true)}>
+                    Save Changes
+                </button>
             </form>
+
+            {showPopUp && (
+                <PopUp
+                    text="Are you sure you want to save these changes?"
+                    onClose={handleCancel}
+                    onConfirm={handleConfirm}
+                />
+            )}
         </div>
     );
 };

@@ -26,7 +26,7 @@ function AddComponent() {
     return (
         <div className={styles.screen}>
             <Navbar onScreenUrl="/add-component" />
-            <Form title="Add component" fields ={fields} commonButton={{text: "Add product"}} textButton={{}} queryUrl="/api/components" redirectUrl="/home" />
+            <Form title="Add component" fields ={fields} commonButton={{text: "Add product"}} textButton={{}} queryUrl="/api/components" redirectUrl="/seeComponents" />
         </div>
     );
 }export default AddComponent;
