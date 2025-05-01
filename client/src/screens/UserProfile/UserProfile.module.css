@@ -6,4 +6,16 @@
     justify-content: center;
     gap: 20px;
     padding: 50px;
+    background-color: #0A060D;
 }
+.screen{
+    display: flex;
+    flex-direction: column;
+    font-family: Inconsolata, monospace;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #0A060D;
+    margin: 0;
+    padding: 0;
+}
+

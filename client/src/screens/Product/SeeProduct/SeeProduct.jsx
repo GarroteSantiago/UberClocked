@@ -50,7 +50,7 @@ function SeeProduct() {
 
     return (
         <div>
-            <h1>{product.name}</h1>
+            <p>product.name</p>
             <img src={product.img} alt="Product image" />
             <p>{product.Description}</p>
             <p>{product.Price_id}</p>
@@ -70,6 +70,4 @@ function SeeProduct() {
             {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
     );
-}
-
-export default SeeProduct;
+} export default SeeProduct;
