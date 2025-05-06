@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import styles from "./StoreHardware.module.css";
 import Navbar from "../../components/navBar/Navbar.jsx";
-import ProductCard from "../../components/store/ProductCard.jsx";
 import ProductCarousel from "../../components/store/ProductCarousel.jsx";
 import TextButton from "../../components/Buttons_and_others/TextButton.jsx";
+import ComponentCard from "../../components/store/ComponentCard.jsx";
 
 function StoreHardware() {
-    const [products, setProducts] = useState([]);
+    const [components, setComponents] = useState([]);
 
-    const getProducts = async () => {
+    const getComponents = async () => {
         try {
-            const response = await fetch("/api/products");
+            const response = await fetch("/api/components");
             const data = await response.json();
-            setProducts(data);
+            setComponents(data);
         } catch (error) {
             console.log(error);
         }
     }
 
     useEffect(() => {
-        getProducts();
-    });
+        getComponents();
+    },[]);
 
     return (
         <div className={styles.screen}>
             <Navbar onScreenUrl={"/store/pc-hardware"}/>
             <ProductCarousel>
-                {products.map((product) => (
-                    <ProductCard product={product}/>
+                {components.map((product) => (
+                    <ComponentCard component={product}/>
                 ))}
             </ProductCarousel>
 
             {(
                 <>
-                    <TextButton text={"Add product"} url={"/add-product"} />
                     <TextButton text={"Add component"} url={"/add-component"} />
                 </>
             )}

@@ -1,6 +1,6 @@
-import Navbar from "../../components/navBar/Navbar.jsx";
+import Navbar from "../../../components/navBar/Navbar.jsx";
 import styles from "./AddComponent.module.css";
-import Form from "../../components/form/Form.jsx"
+import Form from "../../../components/form/Form.jsx"
 
 function AddComponent() {
     const fields= [
@@ -26,7 +26,7 @@ function AddComponent() {
     return (
         <div className={styles.screen}>
             <Navbar onScreenUrl="/add-component" />
-            <Form title="Add component" fields ={fields} commonButton={{text: "Add product"}} textButton={{}} queryUrl="/api/components" redirectUrl="/seeComponents" />
+            <Form title="Add component" fields ={fields} commonButton={{text: "Add Component"}} textButton={{}} queryUrl="/api/components" redirectUrl="/home" />
         </div>
     );
 }export default AddComponent;

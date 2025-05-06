@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
-import PopUp from '../../../components/profile/PopUp.jsx'; // Asegúrate de importar el PopUp
+import PopUp from '../../../components/profile/PopUp.jsx';
 
 function SeeProduct() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
-    const [showPopUp, setShowPopUp] = useState(false); // Para mostrar el PopUp
+    const [showPopUp, setShowPopUp] = useState(false);
     const [error, setError] = useState('');
 
     const getProduct = async () => {
@@ -24,7 +24,7 @@ function SeeProduct() {
         try {
             const response = await axios.delete(`http://localhost:5000/api/products/${id}`);
             console.log(response);
-            setShowPopUp(false); // Cerrar el PopUp después de eliminar el producto
+            setShowPopUp(false);
             navigate("/home");
         } catch (error) {
             console.error(error);
@@ -33,11 +33,11 @@ function SeeProduct() {
     };
 
     const handleCancel = () => {
-        setShowPopUp(false); // Cerrar el PopUp si el usuario cancela
+        setShowPopUp(false);
     };
 
     const handleConfirm = () => {
-        deleteProduct(); // Confirmar eliminación y ejecutar la función
+        deleteProduct();
     };
 
     useEffect(() => {
@@ -55,10 +55,8 @@ function SeeProduct() {
             <p>{product.Description}</p>
             <p>{product.Price_id}</p>
 
-            {/* Botón para eliminar el producto */}
             <button onClick={() => setShowPopUp(true)}>Delete product</button>
 
-            {/* Mostrar el PopUp solo si showPopUp es true */}
             {showPopUp && (
                 <PopUp
                     text="Are you sure you want to delete this product?"

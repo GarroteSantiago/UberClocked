@@ -190,6 +190,17 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
+app.get('/api/component_products/:id', async (req, res) => {
+    try {
+        const componentId = req.params.id;
+        const [rows] = await db.query('SELECT * FROM product WHERE Component_id = ?', [componentId]);
+        res.json(rows);
+    } catch (error) {
+        console.error('Error getting products:', error);
+        res.status(500).json({ message: 'Error getting products' });
+    }
+});
+
 app.get('/api/products/:id', async (req, res) => {
     const id = req.params.id;
     try {
@@ -296,10 +307,10 @@ app.get('/api/components', async (req, res) => {
     }
 });
 
-app.get('/api/components/:name', async (req, res) => {
-    const { name } = req.params;
+app.get('/api/components/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const [rows] = await db.query('SELECT * FROM components WHERE componentName = ?', [name]);
+        const [rows] = await db.query('SELECT * FROM components WHERE component_id = ?', [id]);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'Component not found' });
         }
@@ -354,7 +365,7 @@ app.patch('/api/components/:id', async (req, res) => {
 
         values.push(id);
 
-        const query = `UPDATE components SET ${fields.join(', ')} WHERE Component_id = ?`;
+        const query = `UPDATE components SET ${fields.join(', ')} WHERE component_id = ?`;
 
         const [result] = await db.query(query, values);
 
@@ -372,7 +383,7 @@ app.patch('/api/components/:id', async (req, res) => {
 app.delete('/api/components/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const [result] = await db.query('DELETE FROM components WHERE Component_id = ?', [id]);
+        const [result] = await db.query('DELETE FROM components WHERE component_id = ?', [id]);
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Component not found' });
         }
