@@ -6,7 +6,7 @@ function ComponentCard({component }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`SearchByComponent`);
+        navigate(`SearchByComponent/${component.component_id}`);
     };
 
     return (

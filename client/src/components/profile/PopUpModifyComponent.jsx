@@ -17,10 +17,6 @@ function PopUpModifyComponent({ onClose, onConfirm, component }) {
     }, [component]);
 
     const handleConfirm = () => {
-        if (!name || !type || !img) {
-            alert("Complete todos los campos");
-            return;
-        }
 
         const updatedData = { name, type, img };
         if (onConfirm) onConfirm(updatedData);

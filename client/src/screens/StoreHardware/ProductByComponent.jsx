@@ -12,8 +12,9 @@ function ProductByComponent() {
 
     const getProducts = async () => {
         try {
-            const response = await fetch(`/api/component_product/${id}`);
+            const response = await fetch(`/api/component_products/${id}`);
             const data = await response.json();
+            console.log("Productos: ", data);
             setProducts(data);
         } catch (error) {
             console.log(error);
@@ -23,10 +24,9 @@ function ProductByComponent() {
     useEffect(() => {
         getProducts();
     }, [id]);
-
     return (
         <div className={styles.screen}>
-            <Navbar onScreenUrl={"/store/pc-hardware/SearchByComponent"} />
+            <Navbar onScreenUrl={"/store/pc-hardware/SearchByComponent/:id"} />
             <ProductCarousel>
                 {products.map((product) => (
                     <ProductCard product={product} />

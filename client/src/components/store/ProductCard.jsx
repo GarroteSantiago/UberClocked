@@ -4,8 +4,8 @@ import styles from './ProductCard.module.css';
 import Stars from "../Buttons_and_others/Stars.jsx";
 
 function ProductCard({product }) {
+    console.log('ProductCard', product);
     const navigate = useNavigate();
-
     const handleClick = () => {
         navigate(`/product/${product.Product_id}`);
     };

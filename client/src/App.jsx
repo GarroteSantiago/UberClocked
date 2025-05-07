@@ -29,7 +29,7 @@ function App() {
             <Route path="/add-component" element={<AddComponent />} />
             <Route path="/product/:id" element={<SeeProduct />} />
             <Route path="/components/:id" element={<SeeComponent />} />
-            <Route path="store/pc-hardware/SearchByComponent" element={<ProductByComponent />} />
+            <Route path="store/pc-hardware/SearchByComponent/:id" element={<ProductByComponent />} />
 
         </Routes>
     </>

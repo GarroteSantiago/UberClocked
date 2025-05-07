@@ -217,9 +217,9 @@ app.get('/api/products/:id', async (req, res) => {
 
 app.patch('/api/products/:id', async (req, res) => {
     const { id } = req.params;
-    const { productName, productDescription, rating, price } = req.body;
+    const { productName, productDescription, rating, price, Stock, img} = req.body;
 
-    if (!productName && !productDescription && !rating && !price) {
+    if (!productName && !productDescription && !rating && !price && !Stock && !img) {
         return res.status(400).json({ message: 'At least one field must be provided' });
     }
     try {
@@ -230,7 +230,7 @@ app.patch('/api/products/:id', async (req, res) => {
             values.push(productName);
         }
         if (productDescription) {
-            fields.push('description = ?');
+            fields.push('Description = ?');
             values.push(productDescription);
         }
         if (rating) {
@@ -238,8 +238,16 @@ app.patch('/api/products/:id', async (req, res) => {
             values.push(rating);
         }
         if (price) {
-            fields.push('price = ?');
+            fields.push('Price_id = ?');
             values.push(price);
+        }
+        if(Stock){
+            fields.push('Stock = ?')
+            values.push(Stock);
+        }
+        if(img){
+            fields.push('img = ?')
+            values.push(img);
         }
 
         values.push(id);
@@ -251,7 +259,6 @@ app.patch('/api/products/:id', async (req, res) => {
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Product not found' });
         }
-
         res.json({ message: 'Product updated successfully' });
     } catch (error) {
         console.error('Error updating product:', error);
